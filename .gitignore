@@ -1,0 +1,12 @@
+# JetBrains IDE specific
+.idea/
+
+# macOS specific
+.DS_Store
+
+# Build output folders (good practice for the future)
+/dist/
+/build/
+
+# Dependency folders (good practice for the future)
+/node_modules/
