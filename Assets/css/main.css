@@ -286,3 +286,95 @@ footer {
     color: var(--text-muted);
     font-size: 0.8rem;
 }
+
+/*
+    ================================================================================
+    |   6. RESPONSIVE DESIGN (MEDIA QUERIES)                                       |
+    |------------------------------------------------------------------------------|
+    |   - Styles applied for screens smaller than a certain width (e.g., 768px).   |
+    |   - Adjusts layout from horizontal to vertical for key sections.             |
+    |   - Implements a hamburger menu for mobile navigation.                       |
+    ================================================================================
+*/
+
+/* Hamburger Menu Icon (hidden on desktop by default) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--text-primary);
+}
+
+/* Styles for screens 768px or less */
+@media (max-width: 768px) {
+    /* --- Navigation --- */
+    .hamburger {
+        display: block; /* Show the hamburger icon */
+    }
+
+    .nav-links {
+        position: fixed; /* Take it out of the normal document flow */
+        left: -100%; /* Hide it off-screen to the left */
+        top: 64px; /* Position it just below the navbar */
+        flex-direction: column;
+        background-color: var(--bg-secondary);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        gap: 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links li {
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-primary);
+    }
+
+    .nav-links.active {
+        left: 0; /* Slide the menu into view */
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+        flex-direction: column-reverse; /* Stack image on top of text */
+        padding: 40px 20px;
+        margin: 20px;
+        min-height: auto; /* Let the content define the height */
+    }
+
+    .hero-content {
+        margin-right: 0;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-image {
+        margin-bottom: 40px;
+    }
+
+    .hero-image img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .tech-stack {
+        justify-content: center;
+    }
+
+    /* --- Projects Section --- */
+    .projects-section {
+        padding: 40px 20px;
+        margin: 20px;
+    }
+}

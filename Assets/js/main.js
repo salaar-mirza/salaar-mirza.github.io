@@ -153,4 +153,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Attach the click event listener to both images.
     navLogo.addEventListener('click', triggerAnimation);
     profilePic.addEventListener('click', triggerAnimation);
+
+    // --- Hamburger Menu Logic ---
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    // Toggle the 'active' class on the nav links when the hamburger is clicked.
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Close the mobile menu when a link is clicked for a smoother experience.
+    document.querySelectorAll('.nav-links li a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
 });
