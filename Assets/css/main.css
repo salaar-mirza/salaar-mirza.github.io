@@ -8,11 +8,12 @@
     |   card-based layout for content sections.                                    |
     |                                                                              |
     |   Table of Contents:                                                         |
-    |   1. RESET & GLOBAL STYLES - Basic resets and default styles.                |
-    |   2. NAVIGATION - Styles for the top navigation bar.                         |
-    |   3. HERO SECTION - The main introduction area.                              |
+    |   1. RESET & GLOBAL STYLES - Basic resets, global typography, and theming.   |
+    |   2. NAVIGATION - Styles for the top navigation bar and mobile hamburger.    |
+    |   3. HERO SECTION - The main introduction area with profile and tech stack.  |
     |   4. PROJECTS SECTION - The grid for showcasing project cards.               |
     |   5. FOOTER - The final section of the page.                                 |
+    |   6. RESPONSIVE DESIGN - Media queries for mobile adjustments.               |
     |                                                                              |
     ================================================================================
 */
@@ -21,112 +22,141 @@
     ================================================================================
     |   1. RESET & GLOBAL STYLES                                                   |
     |------------------------------------------------------------------------------|
-    |   - A simple reset removes default browser margins and padding.              |
-    |   - box-sizing: border-box is used for a more intuitive box model.           |
-    |   - A dark background and light text color are set for the body.             |
+    |   - Defines a color palette using CSS Custom Properties for theming.         |
+    |   - Sets a base font, smooth transitions for color properties, and resets    |
+    |     default browser styles.                                                  |
+    |   - VISUAL: Establishes the overall dark theme and consistent typography.    |
     ================================================================================
 */
-
-/*
-    Define the color palette using CSS Custom Properties (variables).
-    These will be the default "dark theme" values.
-    GSAP will animate these variables directly.
-*/
 :root {
-    /* Default to the light theme */
-    --bg-primary: #f4f4f4;
-    --bg-secondary: #ffffff;
-    --bg-card: #ffffff;
-    --text-primary: #111111;
-    --text-secondary: #555555;
-    --text-muted: #777777;
-    --border-primary: #e0e0e0;
-    --border-secondary: #cccccc;
-    --accent-primary: #4CAF50;
+    /* Default to the light theme. These values are dynamically changed by main.js */
+    --bg-primary: #f4f4f4;        /* Main background color */
+    --bg-secondary: #ffffff;      /* Background for navbar, project cards, etc. */
+    --bg-card: #ffffff;           /* Background for hero and project sections */
+    --text-primary: #111111;      /* Main text color */
+    --text-secondary: #555555;    /* Secondary text, descriptions */
+    --text-muted: #777777;        /* Muted text, nav links */
+    --border-primary: #e0e0e0;    /* Light borders */
+    --border-secondary: #cccccc;  /* Slightly darker borders */
+    --accent-primary: #4CAF50;    /* Accent color for highlights, active states */
 }
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Add a transition for color changes to make them smooth */
+    /* Smooth transition for theme changes (color, background-color) */
     transition: color 0.5s ease, background-color 0.5s ease;
 }
 
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    line-height: 1.6;
+    line-height: 1.6; /* Improves readability of text */
 }
 
 a {
-    text-decoration: none;
-    color: inherit; /* Links will inherit color from their parent */
+    text-decoration: none; /* Removes default underline from links */
+    color: inherit; /* Links will inherit color from their parent element */
 }
 
 ul {
-    list-style: none; /* Removes default bullet points */
+    list-style: none; /* Removes default bullet points from unordered lists */
+}
+
+h3 {
+    font-family: 'Poppins', sans-serif; /* Use Poppins for project titles for a distinct look */
 }
 
 /*
     ================================================================================
     |   2. NAVIGATION                                                              |
     |------------------------------------------------------------------------------|
-    |   - A flexbox layout is used for easy alignment.                             |
-    |   - The background is slightly lighter than the body to stand out.           |
-    |   - The logo is styled as a circle.                                          |
+    |   - VISUAL: A sticky bar at the top with logo (left), navigation links      |
+    |     (right), and a hamburger icon (mobile).                                  |
+    |   - BEHAVIOR: On desktop, links are visible. On mobile, links are hidden     |
+    |     and revealed by clicking the hamburger.                                  |
+    |   - JS:   Hamburger menu toggle logic is in main.js.                         |
     ================================================================================
 */
 .navbar {
     display: flex;
-    justify-content: space-between; /* Pushes logo and links to opposite ends */
-    align-items: center;
+    justify-content: space-between; /* Pushes logo to left, nav links to right */
+    align-items: center; /* Vertically centers items */
     padding: 20px 50px;
     background: var(--bg-secondary);
+    position: sticky; /* Makes the navbar stick to the top when scrolling */
+    top: 0;
+    z-index: 1000; /* Ensures navbar stays on top of other content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transform: translateZ(0); /* Force new stacking context for reliable z-index */
 }
 
 .logo img {
     height: 40px;
     width: 40px;
     display: block;
-    border-radius: 50%; /* This is what makes it circular */
+    border-radius: 50%; /* Makes the logo circular */
     object-fit: cover; /* Ensures the image fills the circle without distortion */
+    position: relative; /* Make it eligible for z-index */
+    z-index: 1001; /* Ensure logo is above other elements in navbar */
 }
 
 .nav-links {
     display: flex;
-    gap: 30px; /* Provides space between navigation items */
+    gap: 30px; /* Space between navigation items */
 }
 
 .nav-links a {
-    color: var(--text-muted);
-    transition: color 0.3s;
+    color: var(--text-muted); /* Muted color for non-active links */
+    transition: color 0.3s; /* Smooth color change on hover */
 }
 
 .nav-links a:hover {
-    color: var(--text-primary);
+    color: var(--text-primary); /* Brightens on hover for interactivity */
+}
+
+/* Hamburger menu icon (visible only on mobile, see media query) */
+.hamburger {
+    display: none; /* Hidden by default on desktop */
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--text-primary);
 }
 
 /*
     ================================================================================
-    |   3. HERO SECTION                                                            |
+    |   3. HERO SECTION (id="about")                                               |
     |------------------------------------------------------------------------------|
-    |   - This section acts as a large, visually appealing "card".                 |
-    |   - Flexbox is used to align the text content and the profile image.         |
-    |   - A generous margin and padding create a floating effect.                  |
+    |   - VISUAL: A large, card-like section with an introduction and tech stack.  |
+    |     Text content on the left, circular profile image on the right.           |
+    |   - BEHAVIOR: The logo in the navbar and the profile image in this section   |
+    |     swap places with an animation on click.                                  |
+    |   - JS:   The image swap and theme toggle animation is in main.js.           |
+    |   - FIX:  Added position: relative and z-index to contain stacking context   |
+    |     issues caused by image transforms.                                       |
     ================================================================================
 */
 .hero {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center; /* Vertically centers content and image */
+    justify-content: space-between; /* Pushes content and image to opposite sides */
     min-height: 70vh; /* Ensures the section takes up a good portion of the viewport */
     margin: 40px 5%; /* Creates space around the card */
     padding: 60px; /* Creates generous space inside the card */
-    background-color: var(--bg-card);
+    background-color: var(--bg-card); /* Card background color */
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer shadow for light theme */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: relative; /* Crucial for containing z-index of children */
+    z-index: 1; /* Ensures hero is below navbar but above general content */
 }
 
 .hero-content {
@@ -141,16 +171,16 @@ ul {
 }
 
 .highlight {
-    color: var(--text-primary);
+    color: var(--text-primary); /* Ensures the name stands out */
 }
 
 .hero p {
-    color: var(--text-secondary);
+    color: var(--text-secondary); /* Slightly dimmer color for descriptive text */
     font-size: 1.1rem;
     margin-bottom: 30px;
 }
 
-/* Tech Stack Icons */
+/* Tech Stack Icons below hero text */
 .tech-stack {
     margin-top: 40px;
     display: flex;
@@ -165,26 +195,35 @@ ul {
 }
 
 .tech-stack i:hover {
-    color: var(--text-primary);
+    color: var(--text-primary); /* Icons brighten on hover */
 }
 
-/* Profile Image */
+/* Circular Profile Image Container */
+.hero-image {
+    position: relative; /* Ensure this container has a stacking context */
+    z-index: 0; /* Keep it below the navbar */
+}
+
 .hero-image img {
     width: 350px;
     height: 350px;
     object-fit: cover;
     border-radius: 50%; /* Creates the circular shape */
-    border: 2px solid var(--border-secondary);
-    cursor: pointer; /* Indicates the image is clickable */
+    border: 2px solid var(--border-secondary); /* A subtle border */
+    cursor: pointer; /* Indicates the image is clickable for the swap animation */
+    position: relative; /* Make it eligible for z-index */
+    z-index: 0; /* Keep it within its parent's stacking context */
 }
 
 /*
     ================================================================================
-    |   4. PROJECTS SECTION                                                        |
+    |   4. PROJECTS SECTION (id="projects")                                        |
     |------------------------------------------------------------------------------|
-    |   - This section also uses the card layout for consistency.                  |
-    |   - A CSS Grid with `repeat(auto-fit, ...)` creates a responsive grid        |
-    |     that automatically adjusts the number of columns based on screen size.   |
+    |   - VISUAL: A header with a title and layout toggle (desktop), followed by   |
+    |     a responsive grid of project cards.                                      |
+    |   - BEHAVIOR: On desktop, users can switch between grid and list view.       |
+    |     On mobile, it's a fixed "YouTube-style" list view.                       |
+    |   - JS:   Layout toggle functionality is in main.js.                         |
     ================================================================================
 */
 .projects-section {
@@ -192,32 +231,63 @@ ul {
     padding: 60px;
     background-color: var(--bg-card);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer shadow for light theme */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.projects-header {
+    display: flex;
+    justify-content: space-between; /* Pushes title to left, toggle to right */
+    align-items: center;
+    margin-bottom: 40px;
 }
 
 .projects-section h2 {
     font-size: 2rem;
-    margin-bottom: 40px;
-    border-bottom: 2px solid var(--accent-primary);
+    border-bottom: 2px solid var(--accent-primary); /* Accent underline for title */
     display: inline-block; /* Ensures the border only spans the width of the text */
     padding-bottom: 10px;
 }
 
-/* The responsive grid container */
+/* Desktop-only layout toggle buttons */
+.layout-toggle button {
+    background: none;
+    border: 1px solid var(--border-secondary);
+    color: var(--text-muted);
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.layout-toggle button:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+}
+
+.layout-toggle button.active {
+    background-color: var(--accent-primary);
+    color: #fff;
+    border-color: var(--accent-primary);
+}
+
+/* Responsive Grid Container for Project Cards */
 .project-grid {
     display: grid;
     /*
-        Technical Note: `repeat(auto-fit, minmax(300px, 1fr))`
-        - `auto-fit`: Fits as many columns as possible on one line.
-        - `minmax(300px, 1fr)`: Each column will be at least 300px wide. If there's
+        Technical Note: `repeat(auto-fit, minmax(280px, 1fr))`
+        - `auto-fit`: Creates as many columns as can fit without overflow.
+        - `minmax(280px, 1fr)`: Each column will be at least 280px wide. If there's
           extra space, it will be distributed equally among the columns (1fr).
-          This is the key to making the grid responsive without media queries.
+          This is the key to making the grid responsive without explicit media queries
+          for different desktop breakpoints.
     */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Space between grid items */
 }
 
-/* Individual Project Card Styles */
+/* Individual Project Card Styles (Desktop Grid View) */
 .project-card {
     background: var(--bg-secondary);
     border-radius: 10px;
@@ -228,12 +298,12 @@ ul {
 
 .project-card:hover {
     transform: translateY(-5px); /* Lifts the card up slightly on hover */
-    border-color: var(--accent-primary);
+    border-color: var(--accent-primary); /* Adds a green highlight on hover */
 }
 
 .card-image {
-    height: 180px;
-    background: var(--border-primary);
+    height: 180px; /* Fixed height for project image thumbnails */
+    background: var(--border-primary); /* Placeholder background */
     overflow: hidden;
 }
 
@@ -248,19 +318,20 @@ ul {
 }
 
 .card-content h3 {
+    font-size: clamp(1.1rem, 4vw, 1.25rem); /* Fluid font size for titles */
     margin-bottom: 10px;
 }
 
 .card-content p {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 3vw, 0.95rem); /* Fluid font size for descriptions */
     margin-bottom: 15px;
 }
 
 .tech-icons {
     margin-bottom: 20px;
     color: var(--accent-primary);
-    font-size: 1.2rem;
+    font-size: clamp(1.1rem, 4vw, 1.2rem); /* Fluid icon size */
 }
 
 .tech-icons i {
@@ -268,16 +339,40 @@ ul {
 }
 
 .btn-small {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 3vw, 0.9rem); /* Fluid font size for buttons */
     text-decoration: underline;
     color: var(--text-primary);
 }
 
+/* --- List View Styles (Desktop) --- */
+/* Applied when `.project-grid` also has the `.list-view` class */
+.project-grid.list-view {
+    grid-template-columns: 1fr; /* Forces a single column layout */
+    gap: 20px;
+}
+
+.project-grid.list-view .project-card {
+    display: flex; /* Changes card to a flex container */
+    align-items: center; /* Vertically aligns image and content */
+}
+
+.project-grid.list-view .card-image {
+    height: 150px; /* Larger image for list view */
+    width: 250px; /* Wider image for list view */
+    flex-shrink: 0; /* Prevents image from shrinking */
+}
+
+.project-grid.list-view .card-content {
+    padding: 20px 30px;
+    flex-grow: 1; /* Allows content to take remaining space */
+}
+
 /*
     ================================================================================
-    |   5. FOOTER                                                                  |
+    |   5. FOOTER (id="contact")                                                   |
     |------------------------------------------------------------------------------|
-    |   - A simple, centered footer for copyright information.                     |
+    |   - VISUAL: A simple, centered text block at the bottom of the page.         |
+    |   - BEHAVIOR: Contains dynamically updated copyright year.                   |
     ================================================================================
 */
 footer {
@@ -291,66 +386,54 @@ footer {
     ================================================================================
     |   6. RESPONSIVE DESIGN (MEDIA QUERIES)                                       |
     |------------------------------------------------------------------------------|
-    |   - Styles applied for screens smaller than a certain width (e.g., 768px).   |
+    |   - Handles layout adjustments for screens 768px and smaller (typical tablet/mobile).    |
     |   - Adjusts layout from horizontal to vertical for key sections.             |
     |   - Implements a hamburger menu for mobile navigation.                       |
+    |   - Forces a "YouTube-style" list view for projects on mobile.               |
     ================================================================================
 */
-
-/* Hamburger Menu Icon (hidden on desktop by default) */
-.hamburger {
-    display: none;
-    cursor: pointer;
-}
-
-.hamburger .bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    transition: all 0.3s ease-in-out;
-    background-color: var(--text-primary);
-}
-
-/* Styles for screens 768px or less */
 @media (max-width: 768px) {
-    /* --- Navigation --- */
-    .hamburger {
-        display: block; /* Show the hamburger icon */
+    /* --- Navigation Adjustments --- */
+    .navbar {
+        padding: 15px 20px; /* Adjust padding for smaller screens */
     }
 
     .nav-links {
-        position: fixed; /* Take it out of the normal document flow */
-        left: -100%; /* Hide it off-screen to the left */
-        top: 64px; /* Position it just below the navbar */
-        flex-direction: column;
+        position: fixed; /* Takes nav links out of normal flow */
+        left: -100%; /* Hides menu off-screen to the left */
+        top: 64px; /* Positions menu just below the navbar */
+        flex-direction: column; /* Stacks links vertically */
         background-color: var(--bg-secondary);
         width: 100%;
         text-align: center;
         transition: 0.3s;
-        gap: 0;
+        gap: 0; /* Remove gap between stacked links */
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links li {
         padding: 1rem 0;
-        border-bottom: 1px solid var(--border-primary);
+        border-bottom: 1px solid var(--border-primary); /* Separator between links */
     }
 
     .nav-links.active {
-        left: 0; /* Slide the menu into view */
+        left: 0; /* Slides the menu into view */
     }
 
-    /* --- Hero Section --- */
+    .hamburger {
+        display: block; /* Shows the hamburger icon on mobile */
+    }
+
+    /* --- Hero Section Adjustments --- */
     .hero {
-        flex-direction: column-reverse; /* Stack image on top of text */
+        flex-direction: column-reverse; /* Stacks image on top of text */
         padding: 40px 20px;
         margin: 20px;
-        min-height: auto; /* Let the content define the height */
+        min-height: auto; /* Let content define height */
     }
 
     .hero-content {
-        margin-right: 0;
+        margin-right: 0; /* Remove right margin */
         max-width: 100%;
         text-align: center;
     }
@@ -369,12 +452,76 @@ footer {
     }
 
     .tech-stack {
-        justify-content: center;
+        justify-content: center; /* Center tech icons */
     }
 
-    /* --- Projects Section --- */
+    /* --- Projects Section Adjustments (Mobile - YouTube-style list) --- */
     .projects-section {
-        padding: 40px 20px;
-        margin: 20px;
+        padding: 20px 0; /* Reduced horizontal padding, cards will handle it */
+        margin: 20px 0; /* Full width margin */
+    }
+
+    /* Center the projects section header on mobile */
+    .projects-header {
+        justify-content: center; /* Centers the h2 when layout-toggle is hidden */
+    }
+
+    /* Hide the layout toggle buttons on mobile */
+    .layout-toggle {
+        display: none;
+    }
+
+    /* Force the project grid to a single-column of horizontal cards on mobile */
+    .project-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 15px; /* Space between cards */
+        padding: 0 10px; /* Small padding for the grid itself */
+    }
+
+    .project-grid .project-card {
+        display: flex; /* Make card content horizontal */
+        flex-direction: row; /* Image on left, content on right */
+        align-items: center; /* Vertically align items in the card */
+        border-radius: 10px; /* Keep rounded corners */
+        padding: 10px; /* Padding inside the card */
+    }
+
+    .project-grid .card-image {
+        width: 100px; /* Fixed width for the thumbnail */
+        height: 75px; /* Fixed height for the thumbnail (4:3 aspect ratio) */
+        flex-shrink: 0; /* Prevent image from shrinking */
+        border-radius: 5px; /* Slightly rounded corners for the thumbnail */
+        margin-right: 15px; /* Space between image and text */
+    }
+
+    .project-grid .card-image img, .project-grid .placeholder-img {
+        border-radius: 5px; /* Apply border-radius to the actual image/placeholder */
+    }
+
+    .project-grid .card-content {
+        padding: 0; /* Remove default padding, use card padding instead */
+        flex-grow: 1; /* Allow content to fill remaining space */
+        text-align: left; /* Align text left within the card */
+    }
+
+    .project-grid .card-content h3 {
+        font-size: 1.1rem; /* Adjust title font size for mobile list */
+        margin-bottom: 5px;
+        line-height: 1.3;
+    }
+
+    .project-grid .card-content p {
+        font-size: 0.85rem; /* Adjust description font size for mobile list */
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+
+    .project-grid .tech-icons {
+        font-size: 1.1rem; /* Adjust tech icon size */
+        margin-bottom: 10px;
+    }
+
+    .project-grid .btn-small {
+        font-size: 0.8rem; /* Adjust button font size */
     }
 }

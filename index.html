@@ -6,12 +6,6 @@
     |   This is the primary entry point for the portfolio website. It serves as    |
     |   a central hub to introduce myself and showcase my key projects.            |
     |                                                                              |
-    |   Structure:                                                                 |
-    |   - A navigation bar for easy access to different sections.                  |
-    |   - A "hero" section with a personal introduction and tech stack.            |
-    |   - A "projects" section displaying a grid of selected works.                |
-    |   - A simple footer with copyright information.                              |
-    |                                                                              |
     ================================================================================
 -->
 <!DOCTYPE html>
@@ -24,20 +18,17 @@
     <!-- Main stylesheet for global and component styles -->
     <link rel="stylesheet" href="Assets/css/main.css">
 
+    <!-- Google Fonts: Poppins for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
     <!-- Font Awesome for icons (tech stack, social links, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<!--
-    ================================================================================
-    |   Navigation Bar                                                             |
-    |------------------------------------------------------------------------------|
-    |   - Provides consistent navigation across the site.                          |
-    |   - Links to the main sections: About, Projects, and Contact.                |
-    |   - The logo links back to the top of the page.                              |
-    ================================================================================
--->
+<!-- Navigation Bar -->
 <nav class="navbar">
     <div class="logo">
         <a href="#"><img id="nav-logo" src="Assets/images/ProfilePic.jpg" alt="Salaar Mirza Profile Picture"></a>
@@ -54,16 +45,7 @@
     </div>
 </nav>
 
-<!--
-    ================================================================================
-    |   Hero Section (About Me)                                                    |
-    |------------------------------------------------------------------------------|
-    |   - The first thing a visitor sees.                                          |
-    |   - Contains a brief, impactful introduction.                                |
-    |   - Highlights the core technologies I work with.                            |
-    |   - A professional profile picture adds a personal touch.                    |
-    ================================================================================
--->
+<!-- Hero Section (About Me) -->
 <header id="about" class="hero">
     <div class="hero-content">
         <h1>Hi, I'm <span class="highlight">Salaar Mirza.</span></h1>
@@ -84,23 +66,19 @@
     </div>
 </header>
 
-<!--
-    ================================================================================
-    |   Projects Section                                                           |
-    |------------------------------------------------------------------------------|
-    |   - Showcases a curated selection of my best work.                           |
-    |   - Each project is a "card" with an image, title, brief description,        |
-    |     and a link to a detailed project page.                                   |
-    |   - Tech icons on each card give a quick overview of the tools used.         |
-    ================================================================================
--->
+<!-- Projects Section -->
 <section id="projects" class="projects-section">
-    <h2>Selected Projects</h2>
+    <div class="projects-header">
+        <h2>Selected Projects</h2>
+        <div class="layout-toggle">
+            <button id="grid-view-btn" class="active" title="Grid View"><i class="fas fa-th-large"></i></button>
+            <button id="list-view-btn" title="List View"><i class="fas fa-bars"></i></button>
+        </div>
+    </div>
     <div class="project-grid">
-        <!-- Project Card: Tank Battle 2D -->
+        <!-- Project Card 1: Tank Battle 2D -->
         <div class="project-card">
             <div class="card-image">
-                <!-- Placeholder: Replace with an actual project image or GIF -->
                 <div class="placeholder-img" style="background: #2d2d2d;"></div>
             </div>
             <div class="card-content">
@@ -108,16 +86,15 @@
                 <p>A fast-paced tank shooter built to learn object pooling.</p>
                 <div class="tech-icons">
                     <i class="fab fa-unity"></i>
-                    <i class="fas fa-code"></i> <!-- Generic code icon -->
+                    <i class="fas fa-code"></i>
                 </div>
                 <a href="Projects/TankGame/index.html" class="btn-small">View Project</a>
             </div>
         </div>
 
-        <!-- Project Card: Escape Room -->
+        <!-- Project Card 2: Escape Room -->
         <div class="project-card">
             <div class="card-image">
-                <!-- Placeholder: Replace with an actual project image or GIF -->
                 <div class="placeholder-img" style="background: #1a1a1a;"></div>
             </div>
             <div class="card-content">
@@ -125,41 +102,126 @@
                 <p>First-person puzzle game focusing on interaction mechanics.</p>
                 <div class="tech-icons">
                     <i class="fab fa-unity"></i>
-                    <i class="fab fa-cuttlefish"></i> <!-- C++ icon -->
+                    <i class="fab fa-cuttlefish"></i>
                 </div>
                 <a href="Projects/EscapeRoom/index.html" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+        <!-- Project Card 3 -->
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #2a3a4a;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Project Title 3</h3>
+                <p>A brief description of the project's goals and outcomes.</p>
+                <div class="tech-icons"><i class="fab fa-python"></i></div>
+                <a href="#" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+        <!-- Project Card 4 -->
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #4a2a2a;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Project Title 4</h3>
+                <p>A brief description of the project's goals and outcomes.</p>
+                <div class="tech-icons"><i class="fab fa-js"></i><i class="fab fa-react"></i></div>
+                <a href="#" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+        <!-- Project Card 5 -->
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #2a4a3a;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Project Title 5</h3>
+                <p>A brief description of the project's goals and outcomes.</p>
+                <div class="tech-icons"><i class="fab fa-unity"></i></div>
+                <a href="#" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+        <!-- Project Card 6 -->
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #4a4a2a;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Project Title 6</h3>
+                <p>A brief description of the project's goals and outcomes.</p>
+                <div class="tech-icons"><i class="fab fa-cuttlefish"></i></div>
+                <a href="#" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+        <!-- Project Card 7 -->
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #3a2a4a;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Project Title 7</h3>
+                <p>A brief description of the project's goals and outcomes.</p>
+                <div class="tech-icons"><i class="fab fa-python"></i></div>
+                <a href="#" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+        <!-- Project Card 8 -->
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #2a4a4a;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Project Title 8</h3>
+                <p>A brief description of the project's goals and outcomes.</p>
+                <div class="tech-icons"><i class="fab fa-unity"></i></div>
+                <a href="#" class="btn-small">View Project</a>
+            </div>
+        </div>
+        
+        <!-- Project Card 9 -->
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #444;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Project Title 9</h3>
+                <p>A brief description of the project's goals and outcomes.</p>
+                <div class="tech-icons"><i class="fab fa-js"></i></div>
+                <a href="#" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+        <!-- Project Card 10 -->
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #333;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Project Title 10</h3>
+                <p>A brief description of the project's goals and outcomes.</p>
+                <div class="tech-icons"><i class="fab fa-github"></i></div>
+                <a href="#" class="btn-small">View Project</a>
             </div>
         </div>
     </div>
 </section>
 
-<!--
-    ================================================================================
-    |   Footer                                                                     |
-    |------------------------------------------------------------------------------|
-    |   - Contains copyright information and credits.                              |
-    |   - The year is dynamically updated with JavaScript.                         |
-    ================================================================================
--->
+<!-- Footer -->
 <footer id="contact">
     <p>© <span id="copyright-year"></span> Salaar Mirza. Built with HTML & CSS.</p>
 </footer>
 
-<!--
-    ================================================================================
-    |   Scripts                                                                    |
-    |------------------------------------------------------------------------------|
-    |   - GSAP for animations.                                                     |
-    |   - main.js for custom animations and DOM manipulation.                      |
-    ================================================================================
--->
-<!-- GSAP Library for animations -->
+<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-<!-- Custom script for animations and dynamic content -->
 <script src="Assets/js/main.js"></script>
-
-<!-- Simple script to dynamically update the copyright year -->
 <script>
     document.getElementById('copyright-year').textContent = new Date().getFullYear();
 </script>
