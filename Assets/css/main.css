@@ -1,4 +1,31 @@
-/* 1. RESET & GLOBAL STYLES */
+/*
+    ================================================================================
+    |                                                                              |
+    |   Main Stylesheet (main.css)                                                 |
+    |                                                                              |
+    |   This file contains all the primary styles for the portfolio, organized     |
+    |   into logical sections. The design is dark-themed, modern, and uses a       |
+    |   card-based layout for content sections.                                    |
+    |                                                                              |
+    |   Table of Contents:                                                         |
+    |   1. RESET & GLOBAL STYLES - Basic resets and default styles.                |
+    |   2. NAVIGATION - Styles for the top navigation bar.                         |
+    |   3. HERO SECTION - The main introduction area.                              |
+    |   4. PROJECTS SECTION - The grid for showcasing project cards.               |
+    |   5. FOOTER - The final section of the page.                                 |
+    |                                                                              |
+    ================================================================================
+*/
+
+/*
+    ================================================================================
+    |   1. RESET & GLOBAL STYLES                                                   |
+    |------------------------------------------------------------------------------|
+    |   - A simple reset removes default browser margins and padding.              |
+    |   - box-sizing: border-box is used for a more intuitive box model.           |
+    |   - A dark background and light text color are set for the body.             |
+    ================================================================================
+*/
 * {
     margin: 0;
     padding: 0;
@@ -7,56 +34,83 @@
 }
 
 body {
-    background-color: #050505; /* Deep Black Background */
-    color: #ffffff;
+    background-color: #050505; /* A deep, near-black for the main background */
+    color: #ffffff; /* White text for high contrast */
     line-height: 1.6;
 }
 
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; }
-
-/* 2. NAVIGATION */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    background: #111; /* Lighter black to create a distinct bar */
+a {
+    text-decoration: none;
+    color: inherit; /* Links will inherit color from their parent */
 }
 
-.logo { font-size: 1.5rem; font-weight: bold; }
+ul {
+    list-style: none; /* Removes default bullet points */
+}
+
+/*
+    ================================================================================
+    |   2. NAVIGATION                                                              |
+    |------------------------------------------------------------------------------|
+    |   - A flexbox layout is used for easy alignment.                             |
+    |   - The background is slightly lighter than the body to stand out.           |
+    |   - The logo is styled as a circle.                                          |
+    ================================================================================
+*/
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Pushes logo and links to opposite ends */
+    align-items: center;
+    padding: 20px 50px;
+    background: #111; /* A lighter black to create a distinct bar */
+}
 
 .logo img {
-    height: 40px; /* Adjust this value to your desired logo height */
-    width: 40px; /* Set width equal to height for a perfect circle */
-    display: block; /* Removes any extra space below the image */
+    height: 40px;
+    width: 40px;
+    display: block;
     border-radius: 50%; /* This is what makes it circular */
     object-fit: cover; /* Ensures the image fills the circle without distortion */
 }
 
-.nav-links { display: flex; gap: 30px; }
-.nav-links a { color: #888; transition: 0.3s; }
-.nav-links a:hover { color: #fff; }
+.nav-links {
+    display: flex;
+    gap: 30px; /* Provides space between navigation items */
+}
 
-/* 3. HERO SECTION (The Image Layout) */
+.nav-links a {
+    color: #888; /* A dimmer color for non-active links */
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #fff; /* Brightens on hover for interactivity */
+}
+
+/*
+    ================================================================================
+    |   3. HERO SECTION                                                            |
+    |------------------------------------------------------------------------------|
+    |   - This section acts as a large, visually appealing "card".                 |
+    |   - Flexbox is used to align the text content and the profile image.         |
+    |   - A generous margin and padding create a floating effect.                  |
+    ================================================================================
+*/
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 70vh;
+    min-height: 70vh; /* Ensures the section takes up a good portion of the viewport */
     margin: 40px 5%; /* Creates space around the card */
     padding: 60px; /* Creates generous space inside the card */
-
-    /* This is now the main card */
-    background-color: #1a1a1a;
+    background-color: #1a1a1a; /* The main card color */
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* A shadow to lift the card off the page */
 }
 
 .hero-content {
     max-width: 500px;
-    /* Card styles removed from here */
-    margin-right: 50px; /* Add some space between text card and image */
+    margin-right: 50px; /* Adds space between the text and the image */
 }
 
 .hero h1 {
@@ -65,30 +119,14 @@ ul { list-style: none; }
     margin-bottom: 20px;
 }
 
-.highlight { color: #fff; } /* Keep name white */
+.highlight {
+    color: #fff; /* Ensures the name stands out */
+}
 
 .hero p {
-    color: #aaa;
+    color: #aaa; /* A slightly dimmer color for descriptive text */
     font-size: 1.1rem;
     margin-bottom: 30px;
-}
-
-/* The Green Button */
-.cta-button {
-    display: inline-block;
-    background-color: #4CAF50; /* Green */
-    color: #000;
-    padding: 12px 30px;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: 0.3s;
-    /* The Glow Effect */
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
-}
-
-.cta-button:hover {
-    background-color: #45a049;
-    box-shadow: 0 0 25px rgba(76, 175, 80, 0.6);
 }
 
 /* Tech Stack Icons */
@@ -96,25 +134,38 @@ ul { list-style: none; }
     margin-top: 40px;
     display: flex;
     align-items: center;
-    gap: 20px; /* Space between icons */
-    color: #999; /* Lighter color for better visibility on dark card background */
+    gap: 20px;
+    color: #999;
 }
-.tech-stack i { font-size: 1.5rem; transition: 0.3s; }
-.tech-stack i:hover { color: #fff; }
 
-/* Profile Image (Circular) */
+.tech-stack i {
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.tech-stack i:hover {
+    color: #fff; /* Icons brighten on hover */
+}
+
+/* Profile Image */
 .hero-image img {
     width: 350px;
     height: 350px;
     object-fit: cover;
-    border-radius: 50%; /* Makes it a circle */
-    border: 2px solid #333;
-    cursor: pointer; /* Indicates the image is clickable */
+    border-radius: 50%; /* Creates the circular shape */
+    border: 2px solid #333; /* A subtle border */
 }
 
-/* 4. PROJECTS SECTION */
+/*
+    ================================================================================
+    |   4. PROJECTS SECTION                                                        |
+    |------------------------------------------------------------------------------|
+    |   - This section also uses the card layout for consistency.                  |
+    |   - A CSS Grid with `repeat(auto-fit, ...)` creates a responsive grid        |
+    |     that automatically adjusts the number of columns based on screen size.   |
+    ================================================================================
+*/
 .projects-section {
-    /* Apply the same card styling as the hero section */
     margin: 40px 5%;
     padding: 60px;
     background-color: #1a1a1a;
@@ -125,31 +176,37 @@ ul { list-style: none; }
 .projects-section h2 {
     font-size: 2rem;
     margin-bottom: 40px;
-    border-bottom: 2px solid #4CAF50;
-    display: inline-block;
+    border-bottom: 2px solid #4CAF50; /* A green accent color for the heading underline */
+    display: inline-block; /* Ensures the border only spans the width of the text */
     padding-bottom: 10px;
 }
 
-/* The Magic Grid */
+/* The responsive grid container */
 .project-grid {
     display: grid;
-    /* This line makes it scalable! It fits as many cards as possible */
+    /*
+        Technical Note: `repeat(auto-fit, minmax(300px, 1fr))`
+        - `auto-fit`: Fits as many columns as possible on one line.
+        - `minmax(300px, 1fr)`: Each column will be at least 300px wide. If there's
+          extra space, it will be distributed equally among the columns (1fr).
+          This is the key to making the grid responsive without media queries.
+    */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
 
-/* Project Card Styles */
+/* Individual Project Card Styles */
 .project-card {
-    background: #111;
+    background: #111; /* A darker background for the inner cards */
     border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
+    overflow: hidden; /* Ensures the image corners are rounded */
+    transition: transform 0.3s ease, border-color 0.3s ease;
     border: 1px solid #222;
 }
 
 .project-card:hover {
-    transform: translateY(-5px); /* Moves up slightly on hover */
-    border-color: #4CAF50;
+    transform: translateY(-5px); /* Lifts the card up slightly on hover */
+    border-color: #4CAF50; /* Adds a green highlight on hover */
 }
 
 .card-image {
@@ -161,12 +218,16 @@ ul { list-style: none; }
 .card-image img, .placeholder-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
 }
 
-.card-content { padding: 20px; }
+.card-content {
+    padding: 20px;
+}
 
-.card-content h3 { margin-bottom: 10px; }
+.card-content h3 {
+    margin-bottom: 10px;
+}
 
 .card-content p {
     color: #aaa;
@@ -176,11 +237,13 @@ ul { list-style: none; }
 
 .tech-icons {
     margin-bottom: 20px;
-    color: #4CAF50;
+    color: #4CAF50; /* Green accent for tech icons */
     font-size: 1.2rem;
 }
 
-.tech-icons i { margin-right: 10px; }
+.tech-icons i {
+    margin-right: 10px;
+}
 
 .btn-small {
     font-size: 0.9rem;
@@ -188,10 +251,16 @@ ul { list-style: none; }
     color: #fff;
 }
 
-/* Footer */
+/*
+    ================================================================================
+    |   5. FOOTER                                                                  |
+    |------------------------------------------------------------------------------|
+    |   - A simple, centered footer for copyright information.                     |
+    ================================================================================
+*/
 footer {
     text-align: center;
     padding: 40px;
-    color: #555;
+    color: #555; /* A dim color for less important text */
     font-size: 0.8rem;
 }

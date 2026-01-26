@@ -1,16 +1,43 @@
+<!--
+    ================================================================================
+    |                                                                              |
+    |   Main Portfolio Page (index.html)                                           |
+    |                                                                              |
+    |   This is the primary entry point for the portfolio website. It serves as    |
+    |   a central hub to introduce myself and showcase my key projects.            |
+    |                                                                              |
+    |   Structure:                                                                 |
+    |   - A navigation bar for easy access to different sections.                  |
+    |   - A "hero" section with a personal introduction and tech stack.            |
+    |   - A "projects" section displaying a grid of selected works.                |
+    |   - A simple footer with copyright information.                              |
+    |                                                                              |
+    ================================================================================
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Salaar Mirza - Portfolio</title>
 
+    <!-- Main stylesheet for global and component styles -->
     <link rel="stylesheet" href="Assets/css/main.css">
 
+    <!-- Font Awesome for icons (tech stack, social links, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+<!--
+    ================================================================================
+    |   Navigation Bar                                                             |
+    |------------------------------------------------------------------------------|
+    |   - Provides consistent navigation across the site.                          |
+    |   - Links to the main sections: About, Projects, and Contact.                |
+    |   - The logo links back to the top of the page.                              |
+    ================================================================================
+-->
 <nav class="navbar">
     <div class="logo">
         <a href="#"><img id="nav-logo" src="Assets/images/ProfileLogo.png" alt="Salaar Mirza Logo"></a>
@@ -22,6 +49,16 @@
     </ul>
 </nav>
 
+<!--
+    ================================================================================
+    |   Hero Section (About Me)                                                    |
+    |------------------------------------------------------------------------------|
+    |   - The first thing a visitor sees.                                          |
+    |   - Contains a brief, impactful introduction.                                |
+    |   - Highlights the core technologies I work with.                            |
+    |   - A professional profile picture adds a personal touch.                    |
+    ================================================================================
+-->
 <header id="about" class="hero">
     <div class="hero-content">
         <h1>Hi, I'm <span class="highlight">Salaar Mirza.</span></h1>
@@ -29,27 +66,36 @@
             I am a Software Test Engineer and Game Developer interested in Unity, C++,
             and building immersive experiences.
         </p>
-
         <div class="tech-stack">
             <span>Tech Stack:</span>
             <i class="fab fa-unity" title="Unity"></i>
-            <i class="fab fa-cuttlefish" title="C++"></i> <i class="fab fa-python" title="Python"></i>
+            <i class="fab fa-cuttlefish" title="C++"></i>
+            <i class="fab fa-python" title="Python"></i>
             <i class="fab fa-github" title="GitHub"></i>
         </div>
     </div>
-
     <div class="hero-image">
         <img id="profile-pic" src="Assets/images/ProfilePic.jpg" alt="Profile Picture">
     </div>
 </header>
 
+<!--
+    ================================================================================
+    |   Projects Section                                                           |
+    |------------------------------------------------------------------------------|
+    |   - Showcases a curated selection of my best work.                           |
+    |   - Each project is a "card" with an image, title, brief description,        |
+    |     and a link to a detailed project page.                                   |
+    |   - Tech icons on each card give a quick overview of the tools used.         |
+    ================================================================================
+-->
 <section id="projects" class="projects-section">
     <h2>Selected Projects</h2>
-
     <div class="project-grid">
-
+        <!-- Project Card: Tank Battle 2D -->
         <div class="project-card">
             <div class="card-image">
+                <!-- Placeholder: Replace with an actual project image or GIF -->
                 <div class="placeholder-img" style="background: #2d2d2d;"></div>
             </div>
             <div class="card-content">
@@ -57,13 +103,16 @@
                 <p>A fast-paced tank shooter built to learn object pooling.</p>
                 <div class="tech-icons">
                     <i class="fab fa-unity"></i>
-                    <i class="fas fa-code"></i> </div>
+                    <i class="fas fa-code"></i> <!-- Generic code icon -->
+                </div>
                 <a href="Projects/TankGame/index.html" class="btn-small">View Project</a>
             </div>
         </div>
 
+        <!-- Project Card: Escape Room -->
         <div class="project-card">
             <div class="card-image">
+                <!-- Placeholder: Replace with an actual project image or GIF -->
                 <div class="placeholder-img" style="background: #1a1a1a;"></div>
             </div>
             <div class="card-content">
@@ -71,24 +120,44 @@
                 <p>First-person puzzle game focusing on interaction mechanics.</p>
                 <div class="tech-icons">
                     <i class="fab fa-unity"></i>
-                    <i class="fab fa-cuttlefish"></i>
+                    <i class="fab fa-cuttlefish"></i> <!-- C++ icon -->
                 </div>
                 <a href="Projects/EscapeRoom/index.html" class="btn-small">View Project</a>
             </div>
         </div>
-
     </div>
 </section>
 
-<footer>
-    <p>© 2026 Your Name. Built with HTML & CSS.</p>
+<!--
+    ================================================================================
+    |   Footer                                                                     |
+    |------------------------------------------------------------------------------|
+    |   - Contains copyright information and credits.                              |
+    |   - The year is dynamically updated with JavaScript.                         |
+    ================================================================================
+-->
+<footer id="contact">
+    <p>© <span id="copyright-year"></span> Salaar Mirza. Built with HTML & CSS.</p>
 </footer>
 
-<!-- GSAP Library -->
+<!--
+    ================================================================================
+    |   Scripts                                                                    |
+    |------------------------------------------------------------------------------|
+    |   - GSAP for animations.                                                     |
+    |   - main.js for custom animations and DOM manipulation.                      |
+    ================================================================================
+-->
+<!-- GSAP Library for animations -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-<!-- Your Custom Animation Script -->
+<!-- Custom script for animations and dynamic content -->
 <script src="Assets/js/main.js"></script>
+
+<!-- Simple script to dynamically update the copyright year -->
+<script>
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
