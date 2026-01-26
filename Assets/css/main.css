@@ -504,6 +504,7 @@ footer {
     .contact-section {
         padding: 20px 0; /* Reduced horizontal padding, cards will handle it */
         margin: 20px 0; /* Full width margin */
+        text-align: center; /* Center the "Get In Touch" heading on mobile */
     }
 
     /* Center the projects section header on mobile */
@@ -572,7 +573,12 @@ footer {
 
     /* --- Contact Section Adjustments (Mobile) --- */
     .contact-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        /*
+         * Use fixed-size columns and let justify-content handle the centering.
+         * This prevents the last item in a row from stretching to full width.
+        */
+        grid-template-columns: repeat(auto-fit, 120px);
+        justify-content: center; /* Center the grid items within the container */
         padding: 0 10px;
     }
 }
