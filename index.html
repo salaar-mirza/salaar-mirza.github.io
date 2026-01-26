@@ -3,29 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salaar Mirza - Game Developer Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>My Portfolio</title>
+
+    <link rel="stylesheet" href="Assets/css/main.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header>
-        <!-- The optimized image is referenced here -->
-        <img src="images/profile-picture.jpg" alt="A headshot of Salaar Mirza, smiling." class="profile-img">
-        <h1>Salaar Mirza</h1>
-        <p>Game Developer & Programmer</p>
-    </header>
+<nav class="navbar">
+    <div class="logo">
+        <a href="#"><img id="nav-logo" src="Assets/images/ProfileLogo.png" alt="Salaar Mirza Logo"></a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-    <main>
-        <!-- Your content like About Me, Gallery, etc. will go here -->
-        <h2>Welcome!</h2>
-        <p>This is my portfolio website.</p>
-    </main>
+<header id="about" class="hero">
+    <div class="hero-content">
+        <h1>Hi, I'm <span class="highlight">Salaar Mirza.</span></h1>
+        <p>
+            I am a Software Test Engineer and Game Developer interested in Unity, C++,
+            and building immersive experiences.
+        </p>
 
-    <footer>
-        <!-- Your contact links will go here -->
-        <p>Contact links will be here.</p>
-    </footer>
+        <div class="tech-stack">
+            <span>Tech Stack:</span>
+            <i class="fab fa-unity" title="Unity"></i>
+            <i class="fab fa-cuttlefish" title="C++"></i> <i class="fab fa-python" title="Python"></i>
+            <i class="fab fa-github" title="GitHub"></i>
+        </div>
+    </div>
 
-    <script src="scripts.js"></script>
+    <div class="hero-image">
+        <img id="profile-pic" src="Assets/images/ProfilePic.jpg" alt="Profile Picture">
+    </div>
+</header>
+
+<section id="projects" class="projects-section">
+    <h2>Selected Projects</h2>
+
+    <div class="project-grid">
+
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #2d2d2d;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Tank Battle 2D</h3>
+                <p>A fast-paced tank shooter built to learn object pooling.</p>
+                <div class="tech-icons">
+                    <i class="fab fa-unity"></i>
+                    <i class="fas fa-code"></i> </div>
+                <a href="Projects/TankGame/index.html" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="card-image">
+                <div class="placeholder-img" style="background: #1a1a1a;"></div>
+            </div>
+            <div class="card-content">
+                <h3>Escape Room</h3>
+                <p>First-person puzzle game focusing on interaction mechanics.</p>
+                <div class="tech-icons">
+                    <i class="fab fa-unity"></i>
+                    <i class="fab fa-cuttlefish"></i>
+                </div>
+                <a href="Projects/EscapeRoom/index.html" class="btn-small">View Project</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Your Name. Built with HTML & CSS.</p>
+</footer>
+
+<!-- GSAP Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<!-- Your Custom Animation Script -->
+<script src="Assets/js/main.js"></script>
+
 </body>
 </html>
