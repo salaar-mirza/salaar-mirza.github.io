@@ -96,6 +96,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const logoTarget = !isSwapped ? deltas.logo : { x: 0, y: 0, scale: 1 };
         const picTarget = !isSwapped ? deltas.pic : { x: 0, y: 0, scale: 1 };
 
+        // Define the color palettes for our two themes.
+        const lightTheme = {
+            '--bg-primary': '#f4f4f4',
+            '--bg-secondary': '#ffffff',
+            '--bg-card': '#ffffff',
+            '--text-primary': '#111111',
+            '--text-secondary': '#555555',
+            '--text-muted': '#777777',
+            '--border-primary': '#e0e0e0',
+            '--border-secondary': '#cccccc',
+        };
+
+        const darkTheme = {
+            '--bg-primary': '#050505',
+            '--bg-secondary': '#111',
+            '--bg-card': '#1a1a1a',
+            '--text-primary': '#ffffff',
+            '--text-secondary': '#aaa',
+            '--text-muted': '#888',
+            '--border-primary': '#222',
+            '--border-secondary': '#333',
+        };
+
+        // Determine which theme to animate to.
+        const targetTheme = !isSwapped ? darkTheme : lightTheme;
+
         // Add a fun rotation effect, but only for the forward animation.
         logoTarget.rotation = !isSwapped ? 720 : 0;
         picTarget.rotation = !isSwapped ? -720 : 0;
@@ -107,6 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 isSwapped = !isSwapped; // Toggle the state flag.
             }
         })
+        // Animate the CSS variables on the body for a smooth theme transition.
+        .to('body', {
+            ...targetTheme,
+            duration: 1.5, // Match the duration of the image swap.
+            ease: 'power2.inOut'
+        }, 0)
         // Animate both images at the same time (position 0 on the timeline).
         .to(navLogo, { ...logoTarget, duration: 1.5, ease: 'back.inOut(1.5)' }, 0)
         .to(profilePic, { ...picTarget, duration: 1.5, ease: 'back.inOut(1.5)' }, 0);

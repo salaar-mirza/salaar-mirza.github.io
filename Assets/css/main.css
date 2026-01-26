@@ -26,16 +26,37 @@
     |   - A dark background and light text color are set for the body.             |
     ================================================================================
 */
+
+/*
+    Define the color palette using CSS Custom Properties (variables).
+    These will be the default "dark theme" values.
+    GSAP will animate these variables directly.
+*/
+:root {
+    /* Default to the light theme */
+    --bg-primary: #f4f4f4;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --text-primary: #111111;
+    --text-secondary: #555555;
+    --text-muted: #777777;
+    --border-primary: #e0e0e0;
+    --border-secondary: #cccccc;
+    --accent-primary: #4CAF50;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Add a transition for color changes to make them smooth */
+    transition: color 0.5s ease, background-color 0.5s ease;
 }
 
 body {
-    background-color: #050505; /* A deep, near-black for the main background */
-    color: #ffffff; /* White text for high contrast */
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
@@ -62,7 +83,7 @@ ul {
     justify-content: space-between; /* Pushes logo and links to opposite ends */
     align-items: center;
     padding: 20px 50px;
-    background: #111; /* A lighter black to create a distinct bar */
+    background: var(--bg-secondary);
 }
 
 .logo img {
@@ -79,12 +100,12 @@ ul {
 }
 
 .nav-links a {
-    color: #888; /* A dimmer color for non-active links */
+    color: var(--text-muted);
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #fff; /* Brightens on hover for interactivity */
+    color: var(--text-primary);
 }
 
 /*
@@ -103,9 +124,9 @@ ul {
     min-height: 70vh; /* Ensures the section takes up a good portion of the viewport */
     margin: 40px 5%; /* Creates space around the card */
     padding: 60px; /* Creates generous space inside the card */
-    background-color: #1a1a1a; /* The main card color */
+    background-color: var(--bg-card);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* A shadow to lift the card off the page */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer shadow for light theme */
 }
 
 .hero-content {
@@ -120,11 +141,11 @@ ul {
 }
 
 .highlight {
-    color: #fff; /* Ensures the name stands out */
+    color: var(--text-primary);
 }
 
 .hero p {
-    color: #aaa; /* A slightly dimmer color for descriptive text */
+    color: var(--text-secondary);
     font-size: 1.1rem;
     margin-bottom: 30px;
 }
@@ -134,8 +155,8 @@ ul {
     margin-top: 40px;
     display: flex;
     align-items: center;
-    gap: 20px;
-    color: #999;
+    gap: 20px; /* Space between icons */
+    color: var(--text-muted);
 }
 
 .tech-stack i {
@@ -144,7 +165,7 @@ ul {
 }
 
 .tech-stack i:hover {
-    color: #fff; /* Icons brighten on hover */
+    color: var(--text-primary);
 }
 
 /* Profile Image */
@@ -153,7 +174,8 @@ ul {
     height: 350px;
     object-fit: cover;
     border-radius: 50%; /* Creates the circular shape */
-    border: 2px solid #333; /* A subtle border */
+    border: 2px solid var(--border-secondary);
+    cursor: pointer; /* Indicates the image is clickable */
 }
 
 /*
@@ -168,15 +190,15 @@ ul {
 .projects-section {
     margin: 40px 5%;
     padding: 60px;
-    background-color: #1a1a1a;
+    background-color: var(--bg-card);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer shadow for light theme */
 }
 
 .projects-section h2 {
     font-size: 2rem;
     margin-bottom: 40px;
-    border-bottom: 2px solid #4CAF50; /* A green accent color for the heading underline */
+    border-bottom: 2px solid var(--accent-primary);
     display: inline-block; /* Ensures the border only spans the width of the text */
     padding-bottom: 10px;
 }
@@ -197,21 +219,21 @@ ul {
 
 /* Individual Project Card Styles */
 .project-card {
-    background: #111; /* A darker background for the inner cards */
+    background: var(--bg-secondary);
     border-radius: 10px;
     overflow: hidden; /* Ensures the image corners are rounded */
     transition: transform 0.3s ease, border-color 0.3s ease;
-    border: 1px solid #222;
+    border: 1px solid var(--border-primary);
 }
 
 .project-card:hover {
     transform: translateY(-5px); /* Lifts the card up slightly on hover */
-    border-color: #4CAF50; /* Adds a green highlight on hover */
+    border-color: var(--accent-primary);
 }
 
 .card-image {
     height: 180px;
-    background: #222;
+    background: var(--border-primary);
     overflow: hidden;
 }
 
@@ -230,14 +252,14 @@ ul {
 }
 
 .card-content p {
-    color: #aaa;
+    color: var(--text-secondary);
     font-size: 0.9rem;
     margin-bottom: 15px;
 }
 
 .tech-icons {
     margin-bottom: 20px;
-    color: #4CAF50; /* Green accent for tech icons */
+    color: var(--accent-primary);
     font-size: 1.2rem;
 }
 
@@ -248,7 +270,7 @@ ul {
 .btn-small {
     font-size: 0.9rem;
     text-decoration: underline;
-    color: #fff;
+    color: var(--text-primary);
 }
 
 /*
@@ -261,6 +283,6 @@ ul {
 footer {
     text-align: center;
     padding: 40px;
-    color: #555; /* A dim color for less important text */
+    color: var(--text-muted);
     font-size: 0.8rem;
 }
