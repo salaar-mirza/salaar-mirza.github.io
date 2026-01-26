@@ -226,7 +226,8 @@ h3 {
     |   - JS:   Layout toggle functionality is in main.js.                         |
     ================================================================================
 */
-.projects-section {
+.projects-section,
+.contact-section {
     margin: 40px 5%;
     padding: 60px;
     background-color: var(--bg-card);
@@ -238,11 +239,12 @@ h3 {
     display: flex;
     justify-content: space-between; /* Pushes title to left, toggle to right */
     align-items: center;
-    margin-bottom: 40px;
 }
 
-.projects-section h2 {
+.projects-section h2,
+.contact-section h2 {
     font-size: 2rem;
+    margin-bottom: 40px; /* Add consistent space below section headings */
     border-bottom: 2px solid var(--accent-primary); /* Accent underline for title */
     display: inline-block; /* Ensures the border only spans the width of the text */
     padding-bottom: 10px;
@@ -369,7 +371,49 @@ h3 {
 
 /*
     ================================================================================
-    |   5. FOOTER (id="contact")                                                   |
+    |   5. CONTACT SECTION                                                         |
+    |------------------------------------------------------------------------------|
+    |   - VISUAL: A grid of clickable social media and contact cards.              |
+    |   - BEHAVIOR: Each card links to a corresponding profile or action.         |
+    ================================================================================
+*/
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.social-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 10px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.social-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+}
+
+.social-card i {
+    font-size: 2.5rem;
+    color: var(--accent-primary);
+}
+
+.social-card span {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/*
+    ================================================================================
+    |   6. FOOTER                                                                  |
     |------------------------------------------------------------------------------|
     |   - VISUAL: A simple, centered text block at the bottom of the page.         |
     |   - BEHAVIOR: Contains dynamically updated copyright year.                   |
@@ -384,7 +428,7 @@ footer {
 
 /*
     ================================================================================
-    |   6. RESPONSIVE DESIGN (MEDIA QUERIES)                                       |
+    |   7. RESPONSIVE DESIGN (MEDIA QUERIES)                                       |
     |------------------------------------------------------------------------------|
     |   - Handles layout adjustments for screens 768px and smaller (typical tablet/mobile).    |
     |   - Adjusts layout from horizontal to vertical for key sections.             |
@@ -456,7 +500,8 @@ footer {
     }
 
     /* --- Projects Section Adjustments (Mobile - YouTube-style list) --- */
-    .projects-section {
+    .projects-section,
+    .contact-section {
         padding: 20px 0; /* Reduced horizontal padding, cards will handle it */
         margin: 20px 0; /* Full width margin */
     }
@@ -523,5 +568,11 @@ footer {
 
     .project-grid .btn-small {
         font-size: 0.8rem; /* Adjust button font size */
+    }
+
+    /* --- Contact Section Adjustments (Mobile) --- */
+    .contact-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        padding: 0 10px;
     }
 }
