@@ -156,4 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
             gridViewBtn.classList.remove('active');
         });
     }
+
+    /* ------------------------------------------------------------------------ */
+    /* --- Logo Aura Animation (to encourage clicking) --- */
+    /* ------------------------------------------------------------------------ */
+    const logoAura = document.querySelector('.logo-aura');
+    if (logoAura) {
+        // Create a repeating "pulse" effect
+        gsap.timeline({ repeat: -1, repeatDelay: 1.5 })
+            .to(logoAura, {
+                scale: 1.4,
+                opacity: 1,
+                duration: 0.7,
+                ease: 'power1.out'
+            })
+            .to(logoAura, {
+                scale: 1.8,
+                opacity: 0,
+                duration: 0.7,
+                ease: 'power1.in'
+            });
+    }
 });

@@ -93,14 +93,30 @@ h3 {
     transform: translateZ(0); /* Force new stacking context for reliable z-index */
 }
 
+.logo {
+    position: relative; /* Make it a positioning context for the aura animation */
+}
+
 .logo img {
     height: 40px;
     width: 40px;
     display: block;
     border-radius: 50%; /* Makes the logo circular */
     object-fit: cover; /* Ensures the image fills the circle without distortion */
-    position: relative; /* Make it eligible for z-index */
-    z-index: 1001; /* Ensure logo is above other elements in navbar */
+}
+
+/* Aura effect to draw attention to the clickable logo */
+.logo-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px; /* Slightly larger than the logo */
+    height: 44px;
+    border: 2px solid var(--accent-primary);
+    border-radius: 50%;
+    pointer-events: none; /* So it doesn't block clicks on the logo */
+    opacity: 0; /* Start invisible, animated by GSAP */
 }
 
 .nav-links {
