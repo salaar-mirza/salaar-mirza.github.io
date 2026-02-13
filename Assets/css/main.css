@@ -214,6 +214,18 @@ h3 {
     color: var(--text-primary); /* Icons brighten on hover */
 }
 
+.tech-stack .icon-text {
+    font-size: 1.4rem; /* Increased to match the visual weight of the 1.5rem icons */
+    font-weight: 800; /* Extra bold to look like a logo */
+    font-family: 'Poppins', sans-serif; /* Use the heading font for a cleaner look */
+    cursor: default;
+    transition: color 0.3s;
+}
+
+.tech-stack .icon-text:hover {
+    color: var(--text-primary);
+}
+
 /* Circular Profile Image Container */
 .hero-image {
     position: relative; /* Ensure this container has a stacking context */
