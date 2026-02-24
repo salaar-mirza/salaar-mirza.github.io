@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chest System Architecture | Portfolio</title>
+    
+    <!-- Link to your Main CSS (Adjusted path) -->
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    
+    <!-- Google Fonts (Poppins for headers as per CSS) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Segoe+UI&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Project Specific Styles */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+        }
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #24292e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .github-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. PROJECT NAVIGATION -->
+    <nav class="project-navbar">
+        <!-- Adjust 'index.html' to point to your main portfolio page -->
+        <a href="../../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+    </nav>
+
+    <!-- 2. PROJECT HERO SECTION -->
+    <header class="project-hero">
+        <h1>Unity Loot Box System</h1>
+        <p>A scalable, event-driven architecture for managing game economy and UI state.</p>
+        
+        <a href="https://github.com/salaar-mirza/Chest-System" target="_blank" class="github-btn">
+            <i class="fab fa-github"></i> View Source Code
+        </a>
+
+        <div class="project-meta">
+            <div class="meta-item">
+                <h4>Role</h4>
+                <span>Unity Developer</span>
+            </div>
+            <div class="meta-item">
+                <h4>Timeline</h4>
+                <span>2 Weeks</span>
+            </div>
+            <div class="meta-item">
+                <h4>Tech Stack</h4>
+                <span>Unity (C#), MVC, Git</span>
+            </div>
+            <div class="meta-item">
+                <h4>Key Patterns</h4>
+                <span>Command, Observer, Singleton</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. MAIN CONTENT -->
+    <main class="project-content">
+
+        <!-- Gameplay Video -->
+        <section class="content-block">
+            <h2>Gameplay Demo</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/rIiTpgUkeIk?vq=hd1080&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="content-block">
+            <h2>Project Overview</h2>
+            <p>
+                The Chest System is a modular feature designed to handle the acquisition, unlocking, and opening of loot boxes in a mobile-style game environment. 
+                Unlike a simple prototype, this project was built with <strong>scalability</strong> and <strong>maintainability</strong> in mind.
+            </p>
+            <p>
+                The core challenge was to decouple the Game Logic (Currency, Timers) from the UI (Popups, Animations) while ensuring a smooth user experience. 
+                To achieve this, I implemented a <strong>Service Locator</strong> architecture combined with a centralized <strong>Event Bus</strong>.
+            </p>
+        </section>
+
+        <!-- Architecture -->
+        <section class="content-block">
+            <h2>Architecture: MVC & Services</h2>
+            <p>
+                I moved away from monolithic "Manager" classes and adopted a Service-based approach. The <code>GameService</code> acts as a Singleton entry point, 
+                initializing specific services like <code>EventService</code>, <code>CurrencyService</code>, and <code>UIService</code>.
+            </p>
+            <p>
+                For the chests themselves, I utilized the <strong>Model-View-Controller (MVC)</strong> pattern:
+            </p>
+            <ul>
+                <li><strong>Model:</strong> <code>ChestScriptableObject</code> (Data) & <code>ChestModel</code> (Runtime State).</li>
+                <li><strong>View:</strong> <code>ChestSlotView</code> (UI references and animations).</li>
+                <li><strong>Controller:</strong> <code>ChestSlotController</code> (Handles input and updates the model).</li>
+            </ul>
+
+            <!-- UML Diagram -->
+            <div style="margin-top: 30px;">
+                <a href="../../Assets/images/ChestSystem_1/ChestSystemDiagram.png" target="_blank" title="Click to view full size">
+                    <img src="../../Assets/images/ChestSystem_1/ChestSystemDiagram.png" alt="Chest System UML Architecture Diagram" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                </a>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 10px;"><em>System Architecture UML Diagram (Click to Enlarge)</em></p>
+            </div>
+        </section>
+
+        <!-- Key Feature: Event System -->
+        <section class="content-block">
+            <h2>Decoupling with Event Bus</h2>
+            <p>
+                To prevent "Spaghetti Code," components do not reference each other directly. Instead, they communicate via a type-safe Event Service. 
+                This allows the UI to react to logic changes without the Logic layer knowing the UI exists.
+            </p>
+            
+            <div class="code-block">
+<pre>
+// EventService.cs - The Central Hub
+public class EventService
+{
+    // UI Events
+    public GameEventController&lt;ChestSlotView&gt; OnChestSelected { get; private set; }
+    
+    // Logic Events
+    public GameEventController&lt;int&gt; OnCurrencyUpdated { get; private set; }
+    
+    // Input Events (Commands)
+    public GameEventController OnUndoCommand { get; private set; }
+
+    public EventService()
+    {
+        OnChestSelected = new GameEventController&lt;ChestSlotView&gt;();
+        OnCurrencyUpdated = new GameEventController&lt;int&gt;();
+        OnUndoCommand = new GameEventController();
+    }
+}
+</pre>
+            </div>
+        </section>
+
+        <!-- Key Feature: Command Pattern -->
+        <section class="content-block">
+            <h2>Command Pattern & Undo System</h2>
+            <p>
+                One of the complex requirements was the ability to "Undo" spending gems to unlock a chest. 
+                I implemented the <strong>Command Pattern</strong> to encapsulate actions as objects.
+            </p>
+            <p>
+                When a user unlocks a chest with gems, an <code>InstantUnlockCommand</code> is created and executed. 
+                This command stores the previous state, allowing the system to revert the transaction (refund gems, re-lock chest) if the user clicks Undo.
+            </p>
+
+            <div class="code-block">
+<pre>
+// InstantUnlockCommand.cs
+public class InstantUnlockCommand : ICommand
+{
+    private ChestSlotController _chestSlot;
+    private int _cost;
+
+    public void Execute()
+    {
+        CurrencyService.Instance.DeductGems(_cost);
+        _chestSlot.Unlock();
+    }
+
+    public void Undo()
+    {
+        CurrencyService.Instance.AddGems(_cost); // Refund
+        _chestSlot.Lock(); // Revert State
+    }
+}
+</pre>
+            </div>
+        </section>
+
+        <!-- Key Feature: Data Driven -->
+        <section class="content-block">
+            <h2>Data-Driven Design</h2>
+            <p>
+                The system is designed to be designer-friendly. All chest data (names, icons, coin ranges, unlock times) are stored in 
+                <strong>ScriptableObjects</strong>. This allows game designers to create new chest types or balance the economy without touching a single line of code.
+            </p>
+        </section>
+
+        <!-- Optimization -->
+        <section class="content-block">
+            <h2>Optimization: Object Pooling</h2>
+            <p>
+                To handle visual effects (like rain or coin explosions) efficiently, I implemented a generic <strong>Object Pool</strong>. 
+                This prevents memory fragmentation and Garbage Collection spikes by reusing objects instead of constantly Instantiating and Destroying them.
+            </p>
+        </section>
+
+        <!-- Gallery -->
+        <section class="content-block">
+            <h2>Project Gallery</h2>
+            <div class="gallery-grid">
+                <img src="../../Assets/images/ChestSystem_1/ScreenshotCS1.png" alt="Chest System UI">
+                <img src="../../Assets/images/ChestSystem_1/ScreenshotCS2.png" alt="Chest Unlocking Mechanism">
+                <img src="../../Assets/images/ChestSystem_1/ScreenshotCS3.png" alt="Reward Popup">
+                <img src="../../Assets/images/ChestSystem_1/ScreenshotCS4.png" alt="Currency System">
+                <img src="../../Assets/images/ChestSystem_1/ScreenshotCS5.png" alt="Settings Menu">
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 4. FOOTER -->
+    <footer>
+        <p>&copy; <span id="year"></span> Salaar Mirza. Built with clean code and coffee.</p>
+    </footer>
+
+    <!-- Script to update year automatically -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Floating Back Button -->
+    <a href="../../index.html" class="floating-back-btn" title="Back to Projects">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- Script to toggle floating button on scroll -->
+    <script>
+        const fab = document.querySelector('.floating-back-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                fab.classList.add('visible');
+            } else {
+                fab.classList.remove('visible');
+            }
+        });
+    </script>
+
+    <!-- Scripts for Theme Consistency -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="../../Assets/js/main.js"></script>
+</body>
+</html>

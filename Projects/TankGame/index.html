@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Battle 2D - Salaar Mirza</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../Assets/images/SiteLogo.png">
+
+    <!-- Main Stylesheet (Adjusted path with ../../) -->
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Simple Project Navigation -->
+    <nav class="project-navbar">
+        <a href="../../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+    </nav>
+
+    <!-- Project Hero -->
+    <header class="project-hero">
+        <h1>Tank Battle 2D</h1>
+        <p>A fast-paced tank shooter built to master Object Pooling and Event Systems.</p>
+        
+        <div class="project-meta">
+            <div class="meta-item">
+                <h4>Role</h4>
+                <p>Solo Developer</p>
+            </div>
+            <div class="meta-item">
+                <h4>Engine</h4>
+                <p>Unity (C#)</p>
+            </div>
+            <div class="meta-item">
+                <h4>Duration</h4>
+                <p>2 Weeks</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="project-content">
+        
+        <!-- 1. The Overview -->
+        <section class="content-block">
+            <h2>The Overview</h2>
+            <p>
+                Tank Battle 2D is a top-down shooter where players navigate a maze, dodge enemy fire, and destroy opponent tanks. 
+                The primary goal of this project was not just to make a game, but to implement <strong>scalable architecture</strong> 
+                patterns that are essential for larger projects.
+            </p>
+            <!-- You can add a screenshot <img> here later -->
+        </section>
+
+        <!-- 2. Technical Deep Dive -->
+        <section class="content-block">
+            <h2>Technical Deep Dive: Object Pooling</h2>
+            <p>
+                Instantiating and destroying bullets frequently causes memory fragmentation and triggers the Garbage Collector, 
+                causing frame drops. To solve this, I implemented a generic <strong>Object Pool</strong>.
+            </p>
+            
+            <div class="code-block">
+<pre>
+public class ObjectPool&lt;T&gt; where T : Component
+{
+    private Queue&lt;T&gt; pool = new Queue&lt;T&gt;();
+    private T prefab;
+
+    public T Get() {
+        if (pool.Count > 0) {
+            T instance = pool.Dequeue();
+            instance.gameObject.SetActive(true);
+            return instance;
+        }
+        return GameObject.Instantiate(prefab);
+    }
+}
+</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts for Theme Consistency -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="../../Assets/js/main.js"></script>
+</body>
+</html>

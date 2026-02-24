@@ -368,6 +368,13 @@ h3 {
     margin-right: 10px;
 }
 
+.tech-icons .icon-text {
+    font-weight: 800; /* Extra bold to match icons */
+    font-family: 'Poppins', sans-serif;
+    margin-right: 10px;
+    cursor: default;
+}
+
 .btn-small {
     font-size: clamp(0.8rem, 3vw, 0.9rem); /* Fluid font size for buttons */
     text-decoration: underline;
@@ -609,4 +616,119 @@ footer {
         justify-content: center; /* Center the grid items within the container */
         padding: 0 10px;
     }
+}
+
+/*
+    ================================================================================
+    |   8. PROJECT DETAIL PAGES                                                    |
+    |------------------------------------------------------------------------------|
+    |   - Styles for individual case study pages (e.g., Projects/TankGame/).       |
+    ================================================================================
+*/
+.project-navbar {
+    padding: 20px 5%;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--accent-primary);
+}
+
+.project-hero {
+    text-align: center;
+    padding: 60px 5%;
+    background-color: var(--bg-card);
+    margin: 40px 5%;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project-meta {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.meta-item h4 {
+    color: var(--accent-primary);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.project-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 5% 60px;
+}
+
+.content-block {
+    margin-bottom: 50px;
+}
+
+.content-block h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    border-left: 4px solid var(--accent-primary);
+    padding-left: 15px;
+}
+
+/* Code Snippet Styling */
+.code-block {
+    background: #1e1e1e; /* Dark editor background */
+    color: #d4d4d4;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    margin: 20px 0;
+    border: 1px solid var(--border-primary);
+}
+
+/* Floating Back Button (Hidden by default, appears on scroll) */
+.floating-back-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent-primary); /* Green */
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.floating-back-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.floating-back-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }

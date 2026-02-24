@@ -49,6 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
         '--border-secondary': '#333',
     };
 
+    // --- PERSISTENCE: Check LocalStorage on Load ---
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        isDarkTheme = true;
+        // Apply Dark Theme Variables Immediately
+        for (const [key, value] of Object.entries(darkTheme)) {
+            document.body.style.setProperty(key, value);
+        }
+        // If on Main Page, swap images immediately to match Dark Mode state
+        if (navLogo && profilePic) {
+            const tempSrc = navLogo.src;
+            navLogo.src = profilePic.src;
+            profilePic.src = tempSrc;
+        }
+    }
+
     /* ------------------------------------------------------------------------ */
     /* --- The Fixed Swap Animation Logic --- */
     /* ------------------------------------------------------------------------ */
@@ -87,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Update state
                 isDarkTheme = !isDarkTheme;
+                localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light'); // Save preference
                 isAnimating = false;
             }
         });
