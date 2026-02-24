@@ -49,9 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
         '--border-secondary': '#333',
     };
 
-    // --- PERSISTENCE: Check LocalStorage on Load ---
+    // --- PERSISTENCE & SYSTEM PREFERENCE ---
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Apply Dark Theme if:
+    // 1. User previously saved 'dark'
+    // 2. OR User has no saved preference, but their Device is set to Dark Mode
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
         isDarkTheme = true;
         // Apply Dark Theme Variables Immediately
         for (const [key, value] of Object.entries(darkTheme)) {
@@ -62,6 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const tempSrc = navLogo.src;
             navLogo.src = profilePic.src;
             profilePic.src = tempSrc;
+
+            // Fix z-index for the swapped state so scrolling works immediately
+            gsap.set(navLogo, { zIndex: 2 });
+            gsap.set(profilePic, { zIndex: 1001 });
         }
     }
 
