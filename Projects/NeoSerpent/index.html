@@ -98,6 +98,31 @@
             margin-top: 15px;
             border-left: 4px solid #00FFFF;
         }
+        /* Smoke Animation */
+        .smoke-icon {
+            display: inline-block;
+            position: relative;
+            margin-left: 5px;
+        }
+        .smoke-puff {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            bottom: 10px;
+            left: 50%;
+            animation: smoke 2s infinite;
+            opacity: 0;
+        }
+        .smoke-puff:nth-child(2) { animation-delay: 0.5s; }
+        .smoke-puff:nth-child(3) { animation-delay: 1.0s; }
+        
+        @keyframes smoke {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-15px) scale(2); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -279,7 +304,7 @@ public class SnakePresenter : MonoBehaviour
 
     <!-- 4. FOOTER -->
     <footer>
-        <p>&copy; <span id="year"></span> Salaar Mirza. Built with clean code and coffee.</p>
+        <p>&copy; <span id="year"></span> Salaar Mirza. Built with clean code &  <span class="smoke-icon"><i class="fas fa-smoking"></i><span class="smoke-puff"></span><span class="smoke-puff"></span><span class="smoke-puff"></span></span></p>
     </footer>
 
     <!-- Script to update year automatically -->
