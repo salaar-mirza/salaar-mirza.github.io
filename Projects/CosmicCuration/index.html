@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo-Serpent Architecture | Portfolio</title>
+    <title>Cosmic Curation | Portfolio</title>
     
-    <!-- Favicon -->
+    <!-- Favicon (Adjust path if needed) -->
     <link rel="icon" type="image/png" href="../../Assets/images/SiteLogo.png">
     
-    <!-- Link to your Main CSS (Adjusted path) -->
+    <!-- Link to your Main CSS (Adjust path if needed) -->
     <link rel="stylesheet" href="../../Assets/css/main.css">
     
-    <!-- Google Fonts (Poppins for headers as per CSS) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Segoe+UI&display=swap" rel="stylesheet">
     
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* Project Specific Styles */
+        /* Project Specific Styles from your example */
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
@@ -37,7 +37,7 @@
         }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-top: 30px;
         }
@@ -71,7 +71,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background-color: #00FFFF; /* Cyan for Neo-Serpent vibe */
+            background-color: #00FFFF; /* Cyan accent */
             color: #000;
             padding: 12px 24px;
             border-radius: 6px;
@@ -87,6 +87,7 @@
             transform: translateY(-2px);
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
         }
+
         .code-block {
             background-color: #1e1e1e;
             color: #d4d4d4;
@@ -96,8 +97,9 @@
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 0.9rem;
             margin-top: 15px;
-            border-left: 4px solid #00FFFF;
+            border-left: 4px solid #007bff;
         }
+
         /* Smoke Animation */
         .smoke-icon {
             display: inline-block;
@@ -117,9 +119,9 @@
             animation: smoke 2.5s infinite;
             opacity: 0;
         }
-        .smoke-puff:nth-child(2) { animation-delay: 0.8s; }
-        .smoke-puff:nth-child(3) { animation-delay: 1.6s; }
-        
+        .smoke-puff:nth-of-type(2) { animation-delay: 0.8s; }
+        .smoke-puff:nth-of-type(3) { animation-delay: 1.6s; }
+
         @keyframes smoke {
             0% { transform: translate(-50%, 0) scale(1); opacity: 0; }
             20% { opacity: 0.7; }
@@ -143,13 +145,13 @@
             0%, 100% { box-shadow: 0 0 3px 1px #ff4500; }
             50% { box-shadow: 0 0 6px 2px #ff8c00; }
         }
+        
     </style>
 </head>
 <body>
 
     <!-- 1. PROJECT NAVIGATION -->
     <nav class="project-navbar">
-        <!-- Adjust 'index.html' to point to your main portfolio page -->
         <a href="../../index.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Back to Projects
         </a>
@@ -157,14 +159,15 @@
 
     <!-- 2. PROJECT HERO SECTION -->
     <header class="project-hero">
-        <h1>Neo-Serpent</h1>
-        <p>A retro-cyberpunk arcade game demonstrating Vertical Slice Architecture and clean C# patterns.</p>
+        <h1>Cosmic Curation: A Scalable Space Shooter</h1>
+        <p>A deep dive into applying professional software engineering patterns for a maintainable and performant Unity game.</p>
         
+        <!-- Action Buttons -->
         <div style="margin-top: 20px;">
-            <a href="https://play.unity.com/en/games/371a1c72-627c-4023-bba2-82642f0d8397/neo-serpent" target="_blank" class="play-btn">
-                <i class="fas fa-gamepad"></i> Play in Browser
+            <a href="https://play.unity.com/en/games/b74e3bf8-ed8c-46db-bca3-659d24c4a510/space-shooter-object-pool" target="_blank" class="play-btn">
+                <i class="fas fa-gamepad"></i> Play the Game
             </a>
-            <a href="https://github.com/salaar-mirza/NeoSerpent" target="_blank" class="github-btn">
+            <a href="https://github.com/salaar-mirza/Cosmic-Curation" target="_blank" class="github-btn">
                 <i class="fab fa-github"></i> View Source Code
             </a>
         </div>
@@ -176,15 +179,15 @@
             </div>
             <div class="meta-item">
                 <h4>Timeline</h4>
-                <span>1 Week</span>
+                <span>2 Weeks</span>
             </div>
             <div class="meta-item">
                 <h4>Tech Stack</h4>
-                <span>Unity (C#), Git, </span>
+                <span>Unity (C#), MVC-like, Git</span>
             </div>
             <div class="meta-item">
                 <h4>Key Patterns</h4>
-                <span>Vertical Slices, Observer, Command</span>
+                <span>Service Locator, Object Pooling</span>
             </div>
         </div>
     </header>
@@ -196,115 +199,53 @@
         <section class="content-block">
             <h2>Gameplay Demo</h2>
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/by0hQcdera8?vq=hd1080&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/14QMSW4gGsQ?vq=hd1080&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </section>
 
         <!-- Overview -->
         <section class="content-block">
-            <h2>Project Overview</h2>
+            <h2>Project Overview & Architecture</h2>
             <p>
-                <strong>Neo-Serpent</strong> is a modern take on the classic Snake arcade game, featuring a neon-soaked cyberpunk aesthetic, power-ups, and a competitive 1v1 local multiplayer mode.
+                This project is a classic 2D top-down space shooter built with a strong emphasis on clean, scalable, and maintainable code. It intentionally avoids both the monolithic "spaghetti code" of rapid prototypes and the over-engineered complexity of unnecessary design patterns. The architecture is a pragmatic "sweet spot" that prioritizes performance and long-term maintainability.
             </p>
             <p>
-                Beyond the gameplay, this project serves as a case study in <strong>Vertical Slice Architecture</strong>. 
-                The goal was to move away from "spaghetti code" prototypes and build a scalable, testable codebase where features (like Snake, Food, and GameLoop) are self-contained and highly cohesive.
-            </p>
-        </section>
-
-        <!-- Architecture -->
-        <section class="content-block">
-            <h2>Architecture: Vertical Slices</h2>
-            <p>
-                Traditional Unity projects often layer applications horizontally (e.g., <code>Scripts/UI</code>, <code>Scripts/Managers</code>). 
-                In Neo-Serpent, I organized the codebase by <strong>Feature</strong>.
-            </p>
-            <p>
-                This means everything related to a specific feature—Logic, View, Data, and Spawners—lives together in one folder. 
-                This approach significantly reduces coupling and makes adding new features (like a new Power-Up) much faster and safer.
-            </p>
-
-            <!-- UML Diagram -->
-            <div style="margin-top: 30px;">
-                <a href="../../Assets/images/NeoSerpent/Neo_Serpent_Architecture__Vertical_Slices_.png" target="_blank" title="Click to view full size">
-                    <img src="../../Assets/images/NeoSerpent/Neo_Serpent_Architecture__Vertical_Slices_.png" alt="Neo-Serpent UML Architecture Diagram" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                </a>
-                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 10px;"><em>Vertical Slice Architecture UML Diagram (Click to Enlarge)</em></p>
-            </div>
-        </section>
-
-        <!-- Key Feature: The "God Class" Refactor -->
-        <section class="content-block">
-            <h2>The "God Class" Refactor</h2>
-            <p>
-                A common pitfall in game development is the massive <code>GameManager.cs</code> that does everything. 
-                I refactored this responsibility into three distinct classes to adhere to the <strong>Single Responsibility Principle</strong>:
+                The core structure is built on two pillars: an <strong>MVC-like pattern</strong> for game entities and a <strong>Service Locator</strong> for managing systems.
             </p>
             <ul>
-                <li><strong><code>GameBootstrap</code> (Builder):</strong> Responsible <em>only</em> for wiring dependencies and initialization.</li>
-                <li><strong><code>GameLoopManager</code> (Engine):</strong> Handles the execution loop and time accumulation.</li>
-                <li><strong><code>CollisionSystem</code> (Rules):</strong> Pure logic class determining Win/Loss conditions.</li>
+                <li><strong>Model (Data):</strong> <code>ScriptableObjects</code> hold all entity stats (health, speed, etc.), decoupling game balance from code.</li>
+                <li><strong>View (Presentation):</strong> "Dumb" <code>MonoBehaviour</code> classes are only responsible for visuals and forwarding Unity events.</li>
+                <li><strong>Controller (Logic):</strong> All game logic resides in pure C# classes, making it independent of the Unity scene hierarchy.</li>
             </ul>
-        </section>
-
-        <!-- Key Feature: Decoupling Logic -->
-        <section class="content-block">
-            <h2>Decoupling Logic from View</h2>
-            <p>
-                The Domain Logic (<code>Snake.cs</code>) knows <strong>nothing</strong> about Unity. It uses pure C# events to communicate state changes. 
-                This allows the core game logic to be unit-tested without the overhead of the Unity Editor.
-            </p>
-            
-            <div class="code-block">
-<pre>
-// Snake.cs (Domain Logic) - No UnityEngine dependencies
-public class Snake
-{
-    public event Action OnMove;
-    public event Action&lt;int&gt; OnGrow;
-
-    public void Move()
-    {
-        // ... Calculate new position ...
-        OnMove?.Invoke();
-    }
-}
-
-// SnakePresenter.cs (View) - Handles Unity specifics
-public class SnakePresenter : MonoBehaviour
-{
-    public void Initialize(Snake snake)
-    {
-        // Observer Pattern: React to logic changes
-        snake.OnMove += UpdateVisuals;
-    }
-
-    private void UpdateVisuals() { /* Update Transform/Sprites */ }
-}
-</pre>
+            <div style="margin-top: 30px;">
+                <a href="../../Assets/images/CosmicCuration/ClassesDiagram.png" target="_blank" title="Click to view full size">
+                    <img src="../../Assets/images/CosmicCuration/ClassesDiagram.png" alt="System Architecture UML Diagram" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                </a>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 10px;"><em>System Architecture UML Diagram (Click to Enlarge)</em></p>
             </div>
         </section>
 
-        <!-- Key Feature: Input Abstraction -->
+        <!-- Key Feature: Object Pooling -->
         <section class="content-block">
-            <h2>Input Abstraction & Strategy Pattern</h2>
+            <h2>Key Feature: High-Performance Object Pooling</h2>
             <p>
-                To support both Single Player and Local Multiplayer (where P1 uses WASD and P2 uses Arrow Keys), I implemented an <code>IInputProvider</code> interface.
-            </p>
-            <p>
-                This <strong>Strategy Pattern</strong> allows the game to hot-swap control schemes or even plug in an AI controller without touching the core Snake logic.
+                To avoid performance spikes from frequent <code>Instantiate()</code> and <code>Destroy()</code> calls, the project uses a robust object pooling system for bullets, enemies, and VFX. When an object is "destroyed," it is simply deactivated and returned to its pool, ready to be reused. This ensures smooth, garbage-collection-free gameplay.
             </p>
         </section>
 
-        <!-- Design Decisions -->
+        <!-- Key Feature: Coroutines -->
         <section class="content-block">
-            <h2>Trade-offs: OOP vs. ECS</h2>
+            <h2>Key Feature: Robust Asynchronous Logic</h2>
             <p>
-                For this project, I deliberately chose <strong>Object-Oriented Programming (OOP)</strong> over <strong>Entity Component System (ECS)</strong>.
+                Initially, <code>async/await</code> with <code>Task.Delay</code> was used for time-based logic like weapon fire rates. However, this proved problematic in WebGL builds and ignored Unity's <code>Time.timeScale</code>, breaking pause functionality. The code was refactored to use Unity's native <strong>Coroutines</strong>, which are tightly integrated with the engine's game loop and provide reliable, platform-agnostic behavior.
             </p>
+        </section>
+
+        <!-- Key Feature: Decoupling -->
+        <section class="content-block">
+            <h2>Key Feature: Decoupling with Interfaces</h2>
             <p>
-                <strong>Reasoning:</strong> ECS shines with massive scale (10,000+ objects). Neo-Serpent has ~2 Snakes and ~5 Food items, so the performance overhead of OOP is negligible. 
-                Prioritizing clean <strong>Domain-Driven Design</strong> and maintainability was more valuable for this portfolio piece than raw optimization.
+                To create a decoupled combat system, the <code>IDamageable</code> interface is used. This allows any entity (Player, Enemy) to be damaged without the bullet needing to know its specific type, adhering to the Dependency Inversion Principle.
             </p>
         </section>
 
@@ -312,11 +253,8 @@ public class SnakePresenter : MonoBehaviour
         <section class="content-block">
             <h2>Project Gallery</h2>
             <div class="gallery-grid">
-                <img src="../../Assets/images/NeoSerpent/NeoSerpent-Title.png" alt="Title Screen">
-                <img src="../../Assets/images/NeoSerpent/NeoSerpent-Mainmenu.png" alt="Main Menu">
-                <img src="../../Assets/images/NeoSerpent/NeoSerpent-P1.png" alt="Single Player Gameplay">
-                <img src="../../Assets/images/NeoSerpent/NeoSerpent-P2.png" alt="Multiplayer Action">
-                <img src="../../Assets/images/NeoSerpent/NeoSerpent-Rules.png" alt="Game Rules">
+                <img src="../../Assets/images/CosmicCuration/GameOver.png" alt="Cosmic Curation Game Over Screen">
+                <img src="../../Assets/images/CosmicCuration/Gameplay.png" alt="Cosmic Curation Gameplay">
             </div>
         </section>
 
@@ -332,7 +270,7 @@ public class SnakePresenter : MonoBehaviour
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 
-    <!-- Floating Back Button -->
+    <!-- Floating Back Button (Adjust href) -->
     <a href="../../index.html" class="floating-back-btn" title="Back to Projects">
         <i class="fas fa-arrow-left"></i>
     </a>
@@ -349,7 +287,7 @@ public class SnakePresenter : MonoBehaviour
         });
     </script>
 
-    <!-- Scripts for Theme Consistency -->
+    <!-- Scripts for Theme Consistency (Adjust paths if needed) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="../../Assets/js/main.js"></script>
 </body>

@@ -70,25 +70,45 @@
             display: inline-block;
             position: relative;
             margin-left: 5px;
+            bottom: -3px; /* Align icon with text */
         }
         .smoke-puff {
             position: absolute;
             width: 4px;
             height: 4px;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            bottom: 10px;
-            left: 50%;
-            animation: smoke 2s infinite;
+            bottom: 12px;
+            left: 100%; /* Move smoke to the tip of the cigarette */
+            transform: translateX(-50%);
+            animation: smoke 2.5s infinite;
             opacity: 0;
         }
-        .smoke-puff:nth-child(2) { animation-delay: 0.5s; }
-        .smoke-puff:nth-child(3) { animation-delay: 1.0s; }
+        .smoke-puff:nth-child(2) { animation-delay: 0.8s; }
+        .smoke-puff:nth-child(3) { animation-delay: 1.6s; }
         
         @keyframes smoke {
-            0% { transform: translateY(0) scale(1); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(-15px) scale(2); opacity: 0; }
+            0% { transform: translate(-50%, 0) scale(1); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translate(-50%, -20px) scale(2.5); opacity: 0; }
+        }
+
+        /* Ember/Glow effect */
+        .ember {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #ff4500; /* Red-orange color */
+            border-radius: 50%;
+            bottom: 6px; /* Align vertically with the tip */
+            left: 100%; /* Move to the end of the cigarette */
+            margin-left: -2px; /* Slight overlap */
+            animation: glow 2.5s infinite ease-in-out;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 3px 1px #ff4500; }
+            50% { box-shadow: 0 0 6px 2px #ff8c00; }
         }
     </style>
 </head>
@@ -283,7 +303,7 @@ public class InstantUnlockCommand : ICommand
 
     <!-- 4. FOOTER -->
     <footer>
-        <p>&copy; <span id="year"></span> Salaar Mirza. Built with clean code &  <span class="smoke-icon"><i class="fas fa-smoking"></i><span class="smoke-puff"></span><span class="smoke-puff"></span><span class="smoke-puff"></span></span></p>
+        <p>&copy; <span id="year"></span> Salaar Mirza. Built with clean code &<span class="smoke-icon"><i class="fas fa-smoking"></i><span class="ember"></span><span class="smoke-puff"></span><span class="smoke-puff"></span><span class="smoke-puff"></span></span></p>
     </footer>
 
     <!-- Script to update year automatically -->
