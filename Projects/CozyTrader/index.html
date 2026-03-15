@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Trader Architecture | Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../Assets/images/SiteLogo.png">
+    
+    <!-- Link to your Main CSS -->
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Segoe+UI&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Project Specific Styles */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Button Styles */
+        .btn-container {
+            display: flex;
+            justify-content: center; /* This centers the buttons horizontally */
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .github-btn, .play-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+        .github-btn {
+            background-color: #24292e;
+            color: white;
+        }
+        .play-btn {
+            background-color: #000000; /* Unity Play styling */
+            color: white;
+            border: 2px solid #333;
+        }
+        .github-btn:hover, .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- Resource Pop-up Animation --- */
+        .play-btn {
+            position: relative; /* Establishes a container for the pop-ups */
+            overflow: visible; /* Allows pop-ups to appear outside the button's bounds */
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            perspective: 500px; /* Creates the 3D space for the spin effect */
+        }
+
+        .resource-popup {
+            position: absolute;
+            bottom: 0;
+            width: 30px; /* Adjust size as needed */
+            height: 30px;
+            pointer-events: none; /* Prevents images from blocking mouse events */
+            z-index: -1; /* Places images behind the button */
+            opacity: 0;
+            animation: jump-and-spin 1.5s ease-out forwards;
+        }
+
+        @keyframes jump-and-spin {
+            0% {
+                /* translateZ(-10px) guarantees it spawns behind the button's 3D plane */
+                transform: translateX(-50%) translateY(0) translateZ(-10px) rotateY(0deg);
+                opacity: 1;
+            }
+            20% {
+                /* Hold full brightness for the initial part of the jump */
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) translateY(-80px) translateZ(-10px) rotateY(180deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-60px) translateZ(-10px) rotateY(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Smoke Animation (From your template) */
+        .smoke-icon {
+            display: inline-block;
+            position: relative;
+            margin-left: 5px;
+            bottom: -3px;
+        }
+        .smoke-puff {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            bottom: 12px;
+            left: 100%;
+            transform: translateX(-50%);
+            animation: smoke 2.5s infinite;
+            opacity: 0;
+        }
+        .smoke-puff:nth-child(2) { animation-delay: 0.8s; }
+        .smoke-puff:nth-child(3) { animation-delay: 1.6s; }
+        
+        @keyframes smoke {
+            0% { transform: translate(-50%, 0) scale(1); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translate(-50%, -20px) scale(2.5); opacity: 0; }
+        }
+        .ember {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #ff4500;
+            border-radius: 50%;
+            bottom: 6px;
+            left: 100%;
+            margin-left: -2px;
+            animation: glow 2.5s infinite ease-in-out;
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 3px 1px #ff4500; }
+            50% { box-shadow: 0 0 6px 2px #ff8c00; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. PROJECT NAVIGATION -->
+    <nav class="project-navbar">
+        <a href="../../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+    </nav>
+
+    <!-- 2. PROJECT HERO SECTION -->
+    <header class="project-hero">
+        <h1>Cozy Trader: SOLID Inventory System</h1>
+        <p>A highly scalable, data-driven, and event-based architecture showcase in Unity.</p>
+        
+        <div class="btn-container">
+            <a href="https://github.com/salaar-mirza/ShopInventory_2" target="_blank" class="github-btn">
+                <i class="fab fa-github"></i> View Source Code
+            </a>
+            <a href="https://play.unity.com/en/games/64776a55-0374-47e4-b4cc-7b4685df762d/cozy-trader" target="_blank" class="play-btn">
+                <i class="fas fa-gamepad"></i> Play on Unity Play
+            </a>
+        </div>
+
+        <div class="project-meta">
+            <div class="meta-item">
+                <h4>Role</h4>
+                <span>Unity Developer</span>
+            </div>
+            <div class="meta-item">
+                <h4>Timeline</h4>
+                <span>2 Weeks</span>
+            </div>
+            <div class="meta-item">
+                <h4>Tech Stack</h4>
+                <span>Unity (C#), WebGL, Git</span>
+            </div>
+            <div class="meta-item">
+                <h4>Key Patterns</h4>
+                <span>Service Locator, Event Bus, DI</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. MAIN CONTENT -->
+    <main class="project-content">
+
+        <!-- Gameplay Video -->
+        <section class="content-block">
+            <h2>Gameplay & Architecture Demo</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/squnRexD6qg?vq=hd1080&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Overview (HR Focus: Teamwork & Scalability) -->
+        <section class="content-block">
+            <h2>Project Overview</h2>
+            <p>
+                <strong>Cozy Trader</strong> is a robust 2D RPG inventory, gathering, and economy module. Unlike a quick prototype, I built this project specifically to demonstrate production-ready software engineering.
+            </p>
+            <p>
+                My primary goal was <strong>maintainability and team collaboration</strong>. By utilizing ScriptableObjects and moving away from tightly coupled <code>MonoBehaviours</code>, I ensured that game designers and artists can easily add new items, configure shop prices, or redesign UI layouts without ever needing a programmer to untangle "spaghetti code."
+            </p>
+        </section>
+
+        <!-- Architecture (HR Focus: Planning & Separation of Concerns) -->
+        <section class="content-block">
+            <h2>System Architecture: Designing for Scale</h2>
+            <p>
+                Before writing a single line of code, I mapped out the system's data flow. By utilizing a <strong>Service Locator</strong> and a centralized <strong>Event Bus</strong>, I established a strict separation of concerns. The Game Logic (Services & Controllers) operates completely independently of the Presentation Layer (UI Views). 
+            </p>
+            <p>
+                This means the UI simply "listens" to the game state. If a UI artist accidentally deletes a UI panel, the game's economy math doesn't crash—the system simply keeps running.
+            </p>
+
+            <!-- UML Diagram -->
+            <div style="margin-top: 30px;">
+                <a href="../../Assets/images/Cozy_Trader/Architecture-__Modular_Event_Driven_Architecture__Shop___Inventory_System__.png" target="_blank" title="Click to view full size">
+                    <img src="../../Assets/images/Cozy_Trader/Architecture-__Modular_Event_Driven_Architecture__Shop___Inventory_System__.png" alt="Cozy Trader UML Architecture Diagram" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                </a>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 10px;"><em>System Architecture UML Diagram (Click to Enlarge)</em></p>
+            </div>
+        </section>
+
+        <!-- Key Feature: Problem Solving -->
+        <section class="content-block">
+            <h2>Technical Mindset & Overcoming Challenges</h2>
+            <p>
+                Building a scalable system requires looking past simple tutorials and addressing real software engineering challenges. Here is how I solved specific bottlenecks in this project:
+            </p>
+            
+            <ul style="line-height: 1.8;">
+                <li style="margin-bottom: 15px;">
+                    <strong>Defeating Race Conditions:</strong> Unity's default <code>Awake()</code> and <code>Start()</code> initialization can be unpredictable, causing systems to crash if they try to access data that hasn't loaded yet. I bypassed this by creating a centralized <code>GameInitializer</code> bootstrapper that utilizes Constructor Injection. This explicitly controls the startup sequence, guaranteeing that all core services are fully formed before the UI is allowed to access them.
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>Zero-Allocation Memory Management:</strong> Event-driven systems are great, but they can cause massive Garbage Collection (GC) spikes and frame drops if heavily used. I engineered the custom Event Bus to strictly use <code>structs</code> (value types) for event payloads instead of classes. This generates <strong>zero heap allocation</strong> when broadcasting messages, keeping performance rock-solid.
+                </li>
+                <li>
+                    <strong>Object Pooling for Web/Mobile:</strong> Continuously instantiating and destroying world objects (like gathering wood or dropping items) destroys performance. I implemented a generic Object Pool for the resource spawner, ensuring items are recycled efficiently, making the game smooth even on mobile browsers.
+                </li>
+            </ul>
+        </section>
+
+        <!-- Gallery -->
+        <section class="content-block">
+            <h2>Project Gallery</h2>
+            <div class="gallery-grid">
+                <img src="../../Assets/images/Cozy_Trader/Screenshot01.png" alt="Gathering Resources in the Forest">
+                <img src="../../Assets/images/Cozy_Trader/Screenshot02.png" alt="The Player Inventory Interface">
+                <img src="../../Assets/images/Cozy_Trader/Screenshot03.png" alt="The Shipping Bin Selling Interface">
+                <img src="../../Assets/images/Cozy_Trader/Screenshot04.png" alt="Dynamic Shop User Interface">
+                <img src="../../Assets/images/Cozy_Trader/Screenshot05.png" alt="The Alchemist Potion Shop">
+                <img src="../../Assets/images/Cozy_Trader/Screenshot06.png" alt="The Blacksmith Weapon Shop">
+                <img src="../../Assets/images/Cozy_Trader/Screenshot07.png" alt="Detailed Item Inspect Mode">
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 4. FOOTER -->
+    <footer>
+        <p>&copy; <span id="year"></span> Salaar Mirza. Built with clean code &<span class="smoke-icon"><i class="fas fa-smoking"></i><span class="ember"></span><span class="smoke-puff"></span><span class="smoke-puff"></span><span class="smoke-puff"></span></span></p>
+    </footer>
+
+    <!-- Script to update year automatically -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Floating Back Button -->
+    <a href="../../index.html" class="floating-back-btn" title="Back to Projects">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- Script to toggle floating button on scroll -->
+    <script>
+        const fab = document.querySelector('.floating-back-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                fab.classList.add('visible');
+            } else {
+                fab.classList.remove('visible');
+            }
+        });
+    </script>
+
+    <!-- Scripts for Theme Consistency -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="../../Assets/js/main.js"></script>
+
+    <!-- Script for Resource Pop-up Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const playButton = document.querySelector('.play-btn');
+            if (!playButton) return;
+
+            // IMPORTANT: Replace these with the actual paths to your small resource icon images.
+            // I've used placeholder names based on your project.
+            const resourceImages = [
+                '../../Assets/images/Cozy_Trader/PopUP/Dragon Scale Mail.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Elixir of Vitality.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Glowing Mushroom.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Gold_Coin.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Iron Broadsword.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Magma Axe.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Oak Log.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Scroll of Fireball.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Star Fragment.png',
+                '../../Assets/images/Cozy_Trader/PopUP/Stormbringer.png'
+            ];
+
+            const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+            function spawnResource() {
+                const resourceEl = document.createElement('img');
+                resourceEl.classList.add('resource-popup');
+                resourceEl.src = getRandomItem(resourceImages);
+
+                // Random spot across the width of the button (10% to 90% width)
+                const randomLeft = Math.floor(Math.random() * 80) + 10;
+                resourceEl.style.left = `${randomLeft}%`;
+                
+                playButton.appendChild(resourceEl);
+
+                // Clean up the DOM element after the animation is complete
+                setTimeout(() => {
+                    resourceEl.remove();
+                }, 1500); // Must match the animation duration in CSS
+            }
+
+            let spawnTimeout;
+            let isHovering = false;
+
+            // --- Randomly spawn items over time ---
+            function scheduleNextSpawn() {
+                // If hovering, interval is very fast (150ms to 450ms)
+                // If not hovering, interval is relaxed (1.5s to 4.5s)
+                const minTime = isHovering ? 150 : 1500;
+                const randomRange = isHovering ? 300 : 3000;
+                const randomInterval = Math.random() * randomRange + minTime;
+                
+                spawnTimeout = setTimeout(() => {
+                    spawnResource();
+                    scheduleNextSpawn(); // recursively call to keep the loop going
+                }, randomInterval);
+            }
+
+            // Speed up on hover
+            playButton.addEventListener('mouseenter', () => {
+                isHovering = true;
+                clearTimeout(spawnTimeout); // Cancel the slow timer
+                spawnResource(); // Spawn one immediately for great game-feel
+                scheduleNextSpawn(); // Start the fast timer
+            });
+
+            // Return to normal speed when mouse leaves
+            playButton.addEventListener('mouseleave', () => {
+                isHovering = false;
+                clearTimeout(spawnTimeout); // Cancel the fast timer
+                scheduleNextSpawn(); // Resume the slow timer
+            });
+
+            // Start the infinite spawn loop
+            scheduleNextSpawn();
+        });
+    </script>
+</body>
+</html>
