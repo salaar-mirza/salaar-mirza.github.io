@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper Engine Architecture | Portfolio</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../Assets/images/SiteLogo.png">
+
+    <!-- Link to your Main CSS -->
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Segoe+UI&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Project Specific Styles */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            background-color: #1a1a1a;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Button Styles */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            background-color: #24292e;
+            color: white;
+        }
+        .github-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Smoke Animation */
+        .smoke-icon {
+            display: inline-block;
+            position: relative;
+            margin-left: 5px;
+            bottom: -3px;
+        }
+        .smoke-puff {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            bottom: 12px;
+            left: 100%;
+            transform: translateX(-50%);
+            animation: smoke 2.5s infinite;
+            opacity: 0;
+        }
+        .smoke-puff:nth-child(2) { animation-delay: 0.8s; }
+        .smoke-puff:nth-child(3) { animation-delay: 1.6s; }
+
+        @keyframes smoke {
+            0% { transform: translate(-50%, 0) scale(1); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translate(-50%, -20px) scale(2.5); opacity: 0; }
+        }
+        .ember {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #ff4500;
+            border-radius: 50%;
+            bottom: 6px;
+            left: 100%;
+            margin-left: -2px;
+            animation: glow 2.5s infinite ease-in-out;
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 3px 1px #ff4500; }
+            50% { box-shadow: 0 0 6px 2px #ff8c00; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 1. PROJECT NAVIGATION -->
+<nav class="project-navbar">
+    <a href="../../index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Projects
+    </a>
+</nav>
+
+<!-- 2. PROJECT HERO SECTION -->
+<header class="project-hero">
+    <h1>Minesweeper: Custom C++ Engine</h1>
+    <p>A bespoke 2D game framework demonstrating component-based architecture, RAII memory management, and decoupled systems.</p>
+
+    <div class="btn-container">
+        <a href="https://github.com/salaar-mirza/Array-Minesweeper" target="_blank" class="github-btn" id="repo-btn">
+            <i class="fab fa-github"></i> View Source Code
+        </a>
+    </div>
+
+    <div class="project-meta">
+        <div class="meta-item">
+            <h4>Role</h4>
+            <span>Systems / Engine Programmer</span>
+        </div>
+        <div class="meta-item">
+            <h4>Platform</h4>
+            <span>Windows Desktop</span>
+        </div>
+        <div class="meta-item">
+            <h4>Tech Stack</h4>
+            <span>C++17, SFML 2.5+, Visual Studio</span>
+        </div>
+        <div class="meta-item">
+            <h4>Key Patterns</h4>
+            <span>Dependency Injection, State Machines, Callbacks</span>
+        </div>
+    </div>
+</header>
+
+<!-- 3. MAIN CONTENT -->
+<main class="project-content">
+
+    <!-- Gameplay Demo -->
+    <section class="content-block">
+        <h2>Gameplay & System Demo</h2>
+        <div class="video-wrapper">
+            <!-- Replace with your actual YouTube video link for the Minesweeper game -->
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE?vq=hd1080&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- The "Custom Engine" Pitch -->
+    <section class="content-block">
+        <h2>Building a Framework, Not Just a Game</h2>
+        <p>
+            If I were just building a Minesweeper clone, the entire game would likely live in one or two massive files. Instead, I built an <strong>underlying custom engine framework</strong> that acts as the foundation to <em>run</em> the game.
+        </p>
+        <p>By heavily focusing on separation of concerns, I achieved the following architectural milestones:</p>
+
+        <ul style="line-height: 1.8;">
+            <li style="margin-bottom: 15px;">
+                <strong>Game-Agnostic Core Systems:</strong> I developed standalone systems like the <code>TimeManager</code> (handling frame-independent delta time via <code>&lt;chrono&gt;</code>) and the <code>EventPollingManager</code> (an input abstraction tracking <code>PRESSED</code>, <code>HELD</code>, and <code>RELEASED</code> states). These systems do not contain any Minesweeper-specific logic and can be dropped directly into any other C++ project.
+            </li>
+            <li style="margin-bottom: 15px;">
+                <strong>The Orchestrator (<code>GameLoop</code>):</strong> The main engine runner acts as a high-level state machine. It delegates updates and renders without ever knowing what a "Mine" or "Flag" is, cleanly separating the application lifecycle from the gameplay logic.
+            </li>
+            <li style="margin-bottom: 15px;">
+                <strong>Reusable UI Components:</strong> I engineered a highly reusable <code>Button</code> class utilizing <code>std::function</code> for callback registration. Instead of hardcoding behavior, the UI components simply invoke injected logic. This allows the exact same class to dynamically act as a "Play", "Quit", or "Restart" button based on its parent manager.
+            </li>
+            <li>
+                <strong>Strict Memory Ownership:</strong> The architecture avoids global singletons and enforces strict RAII (Resource Acquisition Is Initialization) memory lifecycles. The <code>GameLoop</code> explicitly owns and destroys the managers, the <code>GameplayManager</code> owns the <code>Board</code>, and the <code>Board</code> safely deallocates its 2D heap array of <code>Cell</code> pointers—guaranteeing <strong>zero memory leaks</strong> upon exit.
+            </li>
+        </ul>
+    </section>
+
+    <!-- Technical Mindset & Problem Solving -->
+    <section class="content-block">
+        <h2>Algorithmic Problem Solving</h2>
+        <p>
+            Beyond the system architecture, I implemented robust C++ algorithms to ensure the gameplay felt authentic and highly optimized:
+        </p>
+
+        <ul style="line-height: 1.8;">
+            <li style="margin-bottom: 15px;">
+                <strong>Eradicating Cyclic Dependencies:</strong> Large C++ projects often suffer from massive compile times and circular include errors. I strictly utilized <strong>Forward Declarations</strong> (e.g., <code>namespace Gameplay { class Board; }</code>) in all header files, reserving <code>#include</code> directives exclusively for the <code>.cpp</code> implementation files to keep the header footprint incredibly light.
+            </li>
+            <li style="margin-bottom: 15px;">
+                <strong>Cache-Friendly Data Layout:</strong> Instead of relying on fragmented heap structures, the Minesweeper grid is initialized as a row-major 2D array (<code>cell[numberOfRows][numberOfColumns]</code>). This aligns with C++ memory layout standards, maximizing CPU cache hits during algorithmic operations.
+            </li>
+            <li>
+                <strong>Advanced Grid Algorithms:</strong> I implemented a randomized procedural mine placement algorithm utilizing <code>std::random_device</code>, paired with a dynamic exclusion zone to guarantee a "Safe Start" on the first user click. Furthermore, I utilized a Depth-First Search (DFS) recursive flood-fill algorithm to instantly reveal interconnected empty cells.
+            </li>
+        </ul>
+    </section>
+
+    <!-- Gallery -->
+    <section class="content-block">
+        <h2>Project Gallery</h2>
+        <div class="gallery-grid">
+            <!-- Replace these with actual screenshots of your Minesweeper game -->
+            <img src="../../Assets/images/Minesweeper/Screenshot01.png" alt="Minesweeper Main Menu">
+            <img src="../../Assets/images/Minesweeper/Screenshot02.png" alt="Safe Start Gameplay">
+            <img src="../../Assets/images/Minesweeper/Screenshot03.png" alt="Flagging Mines">
+            <img src="../../Assets/images/Minesweeper/Screenshot04.png" alt="Victory Screen">
+            <img src="../../Assets/images/Minesweeper/Screenshot05.png" alt="Game Over / Explosion Screen">
+            <img src="../../Assets/images/Minesweeper/Screenshot06.png" alt="HUD and UI Integration">
+        </div>
+    </section>
+
+</main>
+
+<!-- 4. FOOTER -->
+<footer>
+    <p>&copy; <span id="year"></span> Salaar Mirza. Built with clean code &<span class="smoke-icon"><i class="fas fa-smoking"></i><span class="ember"></span><span class="smoke-puff"></span><span class="smoke-puff"></span><span class="smoke-puff"></span></span></p>
+</footer>
+
+<!-- Script to update year automatically -->
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<!-- Floating Back Button -->
+<a href="../../index.html" class="floating-back-btn" title="Back to Projects">
+    <i class="fas fa-arrow-left"></i>
+</a>
+
+<!-- Script to toggle floating button on scroll -->
+<script>
+    const fab = document.querySelector('.floating-back-btn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            fab.classList.add('visible');
+        } else {
+            fab.classList.remove('visible');
+        }
+    });
+</script>
+
+<!-- Scripts for Theme Consistency -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="../../Assets/js/main.js"></script>
+
+</body>
+</html>
