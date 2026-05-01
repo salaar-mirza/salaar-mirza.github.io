@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GripFire XR AR Engine | Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../Assets/images/SiteLogo.png">
+    
+    <!-- Link to your Main CSS -->
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Segoe+UI&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Project Specific Styles */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Button Styles */
+        .btn-container {
+            display: flex;
+            justify-content: center; /* This centers the buttons horizontally */
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .github-btn, .play-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+        .github-btn {
+            background-color: #24292e;
+            color: white;
+        }
+        .play-btn {
+            background-color: #0f9d58; /* Unity Play styling */
+            color: white;
+            border: 2px solid #0f9d58;
+        }
+        .github-btn:hover, .play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- Resource Pop-up Animation --- */
+        .play-btn {
+            position: relative; /* Establishes a container for the pop-ups */
+            overflow: visible; /* Allows pop-ups to appear outside the button's bounds */
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            perspective: 500px; /* Creates the 3D space for the spin effect */
+        }
+
+        .resource-popup {
+            position: absolute;
+            bottom: 0;
+            width: 30px; /* Adjust size as needed */
+            height: 30px;
+            pointer-events: none; /* Prevents images from blocking mouse events */
+            z-index: -1; /* Places images behind the button */
+            opacity: 0;
+            animation: jump-and-spin 1.5s ease-out forwards;
+        }
+
+        @keyframes jump-and-spin {
+            0% {
+                /* translateZ(-10px) guarantees it spawns behind the button's 3D plane */
+                transform: translateX(-50%) translateY(0) translateZ(-10px) rotateY(0deg);
+                opacity: 1;
+            }
+            20% {
+                /* Hold full brightness for the initial part of the jump */
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) translateY(-80px) translateZ(-10px) rotateY(180deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-60px) translateZ(-10px) rotateY(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Smoke Animation (From your template) */
+        .smoke-icon {
+            display: inline-block;
+            position: relative;
+            margin-left: 5px;
+            bottom: -3px;
+        }
+        .smoke-puff {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            bottom: 12px;
+            left: 100%;
+            transform: translateX(-50%);
+            animation: smoke 2.5s infinite;
+            opacity: 0;
+        }
+        .smoke-puff:nth-child(2) { animation-delay: 0.8s; }
+        .smoke-puff:nth-child(3) { animation-delay: 1.6s; }
+        
+        @keyframes smoke {
+            0% { transform: translate(-50%, 0) scale(1); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translate(-50%, -20px) scale(2.5); opacity: 0; }
+        }
+        .ember {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #ff4500;
+            border-radius: 50%;
+            bottom: 6px;
+            left: 100%;
+            margin-left: -2px;
+            animation: glow 2.5s infinite ease-in-out;
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 3px 1px #ff4500; }
+            50% { box-shadow: 0 0 6px 2px #ff8c00; }
+        }
+
+        /* Problem & Solution Narrative Styles */
+        .problem-solution-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .problem-box, .solution-box {
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        .problem-box {
+            background-color: rgba(231, 76, 60, 0.08);
+            border-left-color: #e74c3c;
+        }
+        .solution-box {
+            background-color: rgba(46, 204, 113, 0.08);
+            border-left-color: #2ecc71;
+        }
+        .problem-box h4 { color: #c0392b; margin-bottom: 8px; margin-top: 0; font-size: 1.1rem; }
+        .solution-box h4 { color: #27ae60; margin-bottom: 8px; margin-top: 0; font-size: 1.1rem; }
+        .problem-box p, .solution-box p { margin: 0; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. PROJECT NAVIGATION -->
+    <nav class="project-navbar">
+        <a href="../../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+    </nav>
+
+    <!-- 2. PROJECT HERO SECTION -->
+    <header class="project-hero">
+        <h1>GripFire XR: Physics & AI Engine</h1>
+        <p>A highly optimized, enterprise-grade Unity Augmented Reality prototype built with strict zero-allocation architecture and procedural geometry.</p>
+        
+        <div class="btn-container">
+            <a href="https://github.com/salaar-mirza/GripFire_XR" target="_blank" class="github-btn">
+                <i class="fab fa-github"></i> View Source Code
+            </a>
+            <a href="https://drive.google.com/file/d/1ZPwfCLejMDMOXyMJNEEQnWJKTpnB-e2B/view?usp=drive_link" target="_blank" class="play-btn">
+                <i class="fab fa-google-drive"></i> Download APK
+            </a>
+        </div>
+
+        <div class="project-meta">
+            <div class="meta-item">
+                <h4>Role</h4>
+                <span>Systems Architect / XR Developer</span>
+            </div>
+            <div class="meta-item">
+                <h4>Timeline</h4>
+                <span>3 Weeks</span>
+            </div>
+            <div class="meta-item">
+                <h4>Tech Stack</h4>
+                <span>Unity 6, C#, AR Foundation</span>
+            </div>
+            <div class="meta-item">
+                <h4>Key Patterns</h4>
+                <span>Strict MVC-S, Event Bus, Service Locator</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. MAIN CONTENT -->
+    <main class="project-content">
+
+        <!-- Gameplay Video -->
+        <section class="content-block">
+            <h2>Gameplay Demo</h2>
+            <div class="video-wrapper">
+                <!-- Replace YOUR_YOUTUBE_VIDEO_ID with the actual video ID -->
+                <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?vq=hd1080&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="content-block">
+            <h2>Project Overview</h2>
+            <p>
+                GripFire XR is an Augmented Reality (AR) digital twin experience that blends procedural room generation with a decoupled, event-driven physics sandbox and swarm-based AI combat.
+            </p>
+            <p>
+                The core engineering challenge was to build a mobile AR application that maintains a flawless 60 FPS without thermal throttling. To achieve this, I completely abandoned standard Unity <code>MonoBehaviour</code> spaghetti code in favor of a highly scalable <strong>MVC-S (Model-View-Controller-Service)</strong> architecture, ensuring <strong>zero memory allocations</strong> on the Heap during active gameplay.
+            </p>
+        </section>
+
+        <!-- Architecture -->
+        <section class="content-block">
+            <h2>Architecture: Strict MVC-S & Decoupling</h2>
+            
+            <div class="problem-solution-container">
+                <div class="problem-box">
+                    <h4><i class="fas fa-bug"></i> The Problem: Spaghetti Code</h4>
+                    <p>Standard Unity development relies heavily on monolithic <code>MonoBehaviour</code> scripts and Singletons that directly reference each other. As projects scale, this tight coupling creates "spaghetti code," making systems fragile, hard to test, and prone to breaking when unrelated features are modified.</p>
+                </div>
+                <div class="solution-box">
+                    <h4><i class="fas fa-lightbulb"></i> The Solution: Service Locator & Event Bus</h4>
+                    <p>I engineered a strict <strong>MVC-S (Model-View-Controller-Service)</strong> architecture. Unity components are isolated in "Dumb Views" with zero logic. Pure C# Controllers handle math and state. Systems are entirely blind to one another; dependencies are injected via a <strong>Service Locator</strong>, and cross-system communication is exclusively broadcasted through a decoupled, thread-safe <strong>Event Bus</strong>.</p>
+                </div>
+            </div>
+            
+            <!-- UML Diagram -->
+            <div style="margin-top: 30px;">
+                <a href="../../Assets/images/GripFire/GripFire_XR_Architecture.png" target="_blank" title="Click to view full size">
+                    <img src="../../Assets/images/GripFire/GripFire_XR_Architecture.png" alt="GripFire XR UML Architecture Diagram" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                </a>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 10px;"><em>System Architecture UML Diagram (Click to Enlarge)</em></p>
+            </div>
+        </section>
+
+        <!-- Key Feature: Zero GC -->
+        <section class="content-block">
+            <h2>Zero Garbage Collection (GC) Optimization</h2>
+            
+            <div class="problem-solution-container">
+                <div class="problem-box">
+                    <h4><i class="fas fa-tachometer-alt"></i> The Problem: AR Frame Stutter & Thermal Throttling</h4>
+                    <p>Instantiating objects and passing class-based events during active gameplay creates C# Heap Allocations. When the Heap fills, the Garbage Collector (GC) freezes the main thread to clean up. In Augmented Reality, even a 10-millisecond GC freeze causes tracking drift, drops the frame rate, and induces motion sickness.</p>
+                </div>
+                <div class="solution-box">
+                    <h4><i class="fas fa-rocket"></i> The Solution: 0-Byte Allocations</h4>
+                    <p>I eliminated runtime garbage by replacing native Unity <code>Update()</code> methods with a centralized <code>ITickable</code> loop using a cached integer <code>for</code> loop. All event payloads are stack-allocated <code>readonly struct</code> types. Finally, I implemented the "Hoard & Return" <strong>Object Pooling</strong> strategy to pre-warm all dynamic entities (enemies, bullets, VFX) during the loading screen.</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+<pre>
+// GameInitializer.cs - The Centralized 0-GC Update Loop
+private void Update()
+{
+    // Flush any events that were published from background threads.
+    EventBus.ProcessMainThreadActions();
+    
+    // A standard 'for' loop prevents IEnumerable boxing, achieving true 0B GC Allocation!
+    for (int i = 0; i < _tickableServices.Count; i++)
+    {
+        _tickableServices[i].OnTick();
+    }
+}
+</pre>
+            </div>
+            
+            <!-- Profiler Evidence -->
+            <div style="margin-top: 30px;">
+                <a href="../../Assets/images/GripFire/ZeroGC.png" target="_blank" title="Click to view full size">
+                    <img src="../../Assets/images/GripFire/ZeroGC.png" alt="Unity Profiler Zero GC Report" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                </a>
+                <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 10px;"><em>Unity Profiler: Sustained 0 Bytes GC Allocation during intense combat and physics simulation (Click to Enlarge)</em></p>
+            </div>
+        </section>
+
+        <!-- Key Feature: Hardware Constraints & AR Drift -->
+        <section class="content-block">
+            <h2>Overcoming AR Hardware Constraints</h2>
+
+            <div class="problem-solution-container">
+                <div class="problem-box">
+                    <h4><i class="fas fa-vr-cardboard"></i> The Problem: True XR Hardware is Expensive</h4>
+                    <p>True Mixed Reality—where digital physics interact with physical furniture—usually requires $500 to $3,500 headsets equipped with LiDAR and depth sensors (like the Apple Vision Pro or Meta Quest 3). I certainly didn't have a spare $3,500 lying around (ha!), but I refused to let hardware limitations stop me from building a true XR experience.</p>
+                </div>
+                <div class="solution-box">
+                    <h4><i class="fas fa-mobile-alt"></i> The Solution: The Hybrid "Digital Twin" Mapping</h4>
+                    <p>I engineered a software solution to bypass the hardware limits, bringing XR to standard mobile phones. I combined Unity's <code>ARPlaneManager</code> and <code>ARRaycastManager</code> into a hybrid tool that lets players manually trace their living room. To conquer <strong>AR Tracking Drift</strong>, the entire procedural room is bound to a single <code>ARAnchor</code>, converting all World coordinates into Local space. If the phone's tracking drifts, the anchor corrects it, and the digital physics perfectly snap back to the real world!</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Key Feature: Procedural Geometry -->
+        <section class="content-block">
+            <h2>Procedural Geometry & AI Pathfindingg </h2>
+            
+            <div class="problem-solution-container">
+                <div class="problem-box">
+                    <h4><i class="fas fa-map-marked-alt"></i> The Problem: "Dumb" AR Data</h4>
+                    <p>Raw AR frameworks provide shifting, unreliable planes that lack logical context. If you try to spawn AI enemies directly onto these planes, they will walk through physical walls, get stuck inside real-world furniture, or fail to find a valid NavMesh path.</p>
+                </div>
+                <div class="solution-box">
+                    <h4><i class="fas fa-cube"></i> The Solution: Digital Twin Triangulation</h4>
+                    <p>I built a hybrid raycasting tool allowing users to mathematically trace their room. To prevent the main thread from freezing, the raw coordinate data is securely passed to a <strong>Background CPU Thread</strong>, which procedurally triangulates a double-sided 3D floor mesh. The NavMesh is then baked at runtime, and AI agents utilize <strong>Barycentric Coordinates</strong> to guarantee 100% safe, $O(1)$ constant-time spawn locations.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Back Button -->
+    <a href="../../index.html" class="floating-back-btn" title="Back to Projects">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- 4. FOOTER -->
+    <footer>
+        <p>&copy; <span id="year"></span> Salaar Mirza. Built with clean code &<span class="smoke-icon"><i class="fas fa-smoking"></i><span class="ember"></span><span class="smoke-puff"></span><span class="smoke-puff"></span><span class="smoke-puff"></span></span></p>
+    </footer>
+
+    <!-- Script to update year automatically -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Script to toggle floating button on scroll -->
+    <script>
+        const fab = document.querySelector('.floating-back-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                fab.classList.add('visible');
+            } else {
+                fab.classList.remove('visible');
+            }
+        });
+    </script>
+
+    <!-- Scripts for Theme Consistency -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="../../Assets/js/main.js"></script>
+
+</body>
+</html>
