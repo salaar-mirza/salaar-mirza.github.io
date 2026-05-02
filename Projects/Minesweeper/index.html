@@ -19,23 +19,6 @@
 
     <style>
         /* Project Specific Styles */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 40px;
-            background-color: #1a1a1a;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -137,7 +120,7 @@
     <p>A bespoke 2D game framework demonstrating component-based architecture, RAII memory management, and decoupled systems.</p>
 
     <div class="btn-container">
-        <a href="https://github.com/salaar-mirza/Array-Minesweeper" target="_blank" class="github-btn" id="repo-btn">
+        <a href="https://github.com/salaar-mirza/Minesweeper" target="_blank" class="github-btn" id="repo-btn">
             <i class="fab fa-github"></i> View Source Code
         </a>
     </div>
@@ -165,12 +148,17 @@
 <!-- 3. MAIN CONTENT -->
 <main class="project-content">
 
-    <!-- Gameplay Demo -->
+    <!-- Gallery -->
     <section class="content-block">
-        <h2>Gameplay & System Demo</h2>
-        <div class="video-wrapper">
-            <!-- Replace with your actual YouTube video link for the Minesweeper game -->
-            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE?vq=hd1080&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <h2>Project Gallery</h2>
+        <div class="gallery-grid">
+            <!-- Replace these with actual screenshots of your Minesweeper game -->
+            <img src="../../Assets/images/Minesweeper/MineSweeper1.png" alt="Minesweeper Main Menu">
+            <img src="../../Assets/images/Minesweeper/MineSweeper2.png" alt="Safe Start Gameplay">
+            <img src="../../Assets/images/Minesweeper/MineSweeper3.png" alt="Flagging Mines">
+ <!--           <img src="../../Assets/images/Minesweeper/Screenshot04.png" alt="Victory Screen">
+            <img src="../../Assets/images/Minesweeper/Screenshot05.png" alt="Game Over / Explosion Screen">
+            <img src="../../Assets/images/Minesweeper/Screenshot06.png" alt="HUD and UI Integration">-->
         </div>
     </section>
 
@@ -216,20 +204,6 @@
                 <strong>Advanced Grid Algorithms:</strong> I implemented a randomized procedural mine placement algorithm utilizing <code>std::random_device</code>, paired with a dynamic exclusion zone to guarantee a "Safe Start" on the first user click. Furthermore, I utilized a Depth-First Search (DFS) recursive flood-fill algorithm to instantly reveal interconnected empty cells.
             </li>
         </ul>
-    </section>
-
-    <!-- Gallery -->
-    <section class="content-block">
-        <h2>Project Gallery</h2>
-        <div class="gallery-grid">
-            <!-- Replace these with actual screenshots of your Minesweeper game -->
-            <img src="../../Assets/images/Minesweeper/Screenshot01.png" alt="Minesweeper Main Menu">
-            <img src="../../Assets/images/Minesweeper/Screenshot02.png" alt="Safe Start Gameplay">
-            <img src="../../Assets/images/Minesweeper/Screenshot03.png" alt="Flagging Mines">
-            <img src="../../Assets/images/Minesweeper/Screenshot04.png" alt="Victory Screen">
-            <img src="../../Assets/images/Minesweeper/Screenshot05.png" alt="Game Over / Explosion Screen">
-            <img src="../../Assets/images/Minesweeper/Screenshot06.png" alt="HUD and UI Integration">
-        </div>
     </section>
 
 </main>
