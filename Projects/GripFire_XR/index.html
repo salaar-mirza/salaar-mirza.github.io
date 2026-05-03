@@ -21,12 +21,23 @@
         /* Project Specific Styles */
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%; /* Default 16:9 Aspect Ratio for desktops */
             height: 0;
             overflow: hidden;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             margin-bottom: 40px;
+            max-width: 800px; /* Limit width on large screens */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Mobile override for 9:16 vertical video */
+        @media (max-width: 768px) {
+            .video-wrapper {
+                padding-bottom: 177.77%; /* 9:16 Aspect Ratio (16/9 = 1.7777) */
+                max-width: 100%; /* Take full width of container */
+            }
         }
         .video-wrapper iframe {
             position: absolute;
@@ -241,8 +252,7 @@
         <section class="content-block">
             <h2>Gameplay Demo</h2>
             <div class="video-wrapper">
-                <!-- Replace YOUR_YOUTUBE_VIDEO_ID with the actual video ID -->
-                <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?vq=hd1080&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/0p2rLwmTEx0?si=FjJQ2jv0CzStocU_" title="GripFire XR | Unity AR Physics & AI Engine (Tech Demo)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </section>
 
